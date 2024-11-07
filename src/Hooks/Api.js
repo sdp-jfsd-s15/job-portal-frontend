@@ -3,25 +3,31 @@ import axios from 'axios';
 export const API = axios.create();
 
 API.interceptors.request.use(
-    function (config){
-        const access_token = sessionStorage.getItem('accessToken');
-        config.headers = {
-            "Authorization": `Bearer ${access_token}`,
-        };
+    function (config) {
+        // Retrieve the idToken from sessionStorage
+        const tokenInfo = JSON.parse(sessionStorage.getItem('tokenInfo'));
+        const idToken = tokenInfo ? tokenInfo.idToken : null;
+
+        // Add idToken to Authorization header if available
+        if (idToken) {
+            config.headers = {
+                ...config.headers,
+                "Authorization": `Bearer ${idToken}`,
+            };
+        }
 
         return config;
     },
-    function(error){
+    function (error) {
         return Promise.reject(error);
     }
 );
 
 API.interceptors.response.use(
-    function(response){
+    function (response) {
         return response;
-    }
-    ,
-    function(error){
+    },
+    function (error) {
         return Promise.reject(error);
     }
 );

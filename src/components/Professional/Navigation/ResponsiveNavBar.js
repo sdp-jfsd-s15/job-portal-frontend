@@ -20,6 +20,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkIcon from '@mui/icons-material/Work';
 import MessageIcon from '@mui/icons-material/Message';
+import { useAuth } from '../../../Token/AuthContext';
 
 const drawerWidth = 240;
 
@@ -34,6 +35,8 @@ function DrawerAppBar(props) {
         setMobileOpen((prevState) => !prevState);
         setShowTitle((prevState) => !prevState);
     };
+
+    const { user } = useAuth();
 
     const isActive = (path) => location.pathname === path;
 
@@ -178,7 +181,7 @@ function DrawerAppBar(props) {
                                     color: '#fff',
                                 },
                             }}
-                            onClick={() => navigate("/contact/")}
+                            onClick={() => navigate(`/professional/profile/${user.username}`)}
                         >
                             <AccountCircleIcon />
                         </Button>

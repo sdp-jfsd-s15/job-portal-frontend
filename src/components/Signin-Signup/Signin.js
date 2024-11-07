@@ -19,6 +19,7 @@ const Signin = () => {
       // Store the tokens in context
       if (idToken && accessToken) {
         login({ idToken, accessToken, expiresIn });
+        console.log(accessToken)
         navigate("/");
       }
 

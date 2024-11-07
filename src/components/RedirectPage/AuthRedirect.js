@@ -18,7 +18,7 @@ const AuthRedirect = () => {
         // Call login function to store user and token information
         login({ idToken, accessToken, expiresIn });
 
-        navigate("/profile"); 
+        navigate("/check-profile"); 
       }
     }
   }, [login, navigate]);
