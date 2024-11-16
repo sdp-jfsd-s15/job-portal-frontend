@@ -14,24 +14,23 @@ const ProfileRedirector = () => {
                 return;
             }
 
-            const url = `/v1/api/users/checkUser/${user.username}`;
-            console.log("Requesting URL:", url);
+            const url = `http://localhost:9090/v1/api/users/checkUser/${user.username}`;
 
             try {
                 const response = await API.get(url);
 
                 if (response.status === 200) {
                     navigate(`/professional/profile/${user.username}`);
-                } 
-                else if (response.status === 404) {
-                    navigate('/create-profile');
                 }
             } catch (error) {
-                console.error("Error fetching profile:", error);
-                navigate('/create-profile'); // Redirect to profile creation if there's an error
+                if (error.response && error.response.status === 404) {
+                    navigate('/create-profile');
+                } else {
+                    console.error("Error fetching profile:", error);
+                }
             }
         };
-        
+
         fetchProfile();
     }, [navigate, user]);
 

@@ -54,7 +54,7 @@ const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
             location: `${state}, ${value}` // Combine state and country in location
         });
     };
-    
+
     const handleStateChange = (value) => {
         setState(value); // Update state
         // Update userForm location with the new state and country

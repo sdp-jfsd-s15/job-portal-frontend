@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-export const API = axios.create();
+export const API = axios.create({
+    baseURL: 'http://localhost:9090', // Your backend base URL
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true, // Include credentials in cross-origin requests if needed
+});
 
 API.interceptors.request.use(
     function (config) {
@@ -9,12 +15,9 @@ API.interceptors.request.use(
         const idToken = tokenInfo ? tokenInfo.idToken : null;
 
         // Add idToken to Authorization header if available
-        if (idToken) {
-            config.headers = {
-                ...config.headers,
-                "Authorization": `Bearer ${idToken}`,
-            };
-        }
+        config.headers = {
+            "Authorization": `Bearer ${idToken}`,
+        };
 
         return config;
     },
@@ -24,12 +27,16 @@ API.interceptors.request.use(
 );
 
 API.interceptors.response.use(
-    function (response) {
+    function(response){
         return response;
-    },
-    function (error) {
+    }
+    ,
+    function(error){
         return Promise.reject(error);
     }
 );
 
 export default API;
+
+
+

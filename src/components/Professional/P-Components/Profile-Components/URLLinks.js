@@ -24,13 +24,14 @@ const URLLinks = ({ userdetails }) => {
             <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography gutterBottom variant="h6" component="div">
-                        <b>Profile Language</b>
+                        <b>Profile Language</b><br/>
                     </Typography>
                     <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
                 </Box>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
-                    English
+                    English || <b>Role:</b>{userdetails.role}
                 </Typography>
+                
                 <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography gutterBottom variant="h6" component="div">

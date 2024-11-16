@@ -8,9 +8,6 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -20,7 +17,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import WorkIcon from '@mui/icons-material/Work';
 import MessageIcon from '@mui/icons-material/Message';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useAuth } from '../../../Token/AuthContext';
+import UserSearchBar from './UserSearchBar';
 
 const drawerWidth = 240;
 
@@ -106,19 +105,7 @@ function DrawerAppBar(props) {
                     >
                         <b>JOB DEKLO</b>
                     </Typography>
-                    <Paper
-                        component="form"
-                        sx={{ display: 'flex', alignItems: 'center', width: 300 }} // Align next to the logo
-                    >
-                        <InputBase
-                            sx={{ ml: 1, flex: 1 }}
-                            placeholder="Search Users"
-                            inputProps={{ 'aria-label': 'search google maps' }}
-                        />
-                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
-                    </Paper>
+                    <UserSearchBar/>
                     <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginRight: '150px', alignItems: 'center', ml: 25 }}>
                         <Button
                             sx={{
@@ -148,33 +135,33 @@ function DrawerAppBar(props) {
                         </Button>
                         <Button
                             sx={{
-                                color: isActive("/messages/") ? 'black' : '#073a8c',
+                                color: isActive("/professional/messages/") ? 'black' : '#073a8c',
                                 mr: 3, // Reduce margin between buttons
                                 '&:hover': {
                                     backgroundColor: '#073a8c',
                                     color: '#fff',
                                 }
                             }}
-                            onClick={() => navigate("/messages/")}
+                            onClick={() => navigate("/professional/messages/")}
                         >
                             <MessageIcon />
                         </Button>
                         <Button
                             sx={{
-                                color: isActive("/work/") ? 'black' : '#073a8c',
+                                color: isActive("/professional/work/") ? 'black' : '#073a8c',
                                 mr: 3, // Reduce margin between buttons
                                 '&:hover': {
                                     backgroundColor: '#073a8c',
                                     color: '#fff',
                                 }
                             }}
-                            onClick={() => navigate("/work/")}
+                            onClick={() => navigate("/professional/work/")}
                         >
                             <WorkIcon />
                         </Button>
                         <Button
                             sx={{
-                                color: isActive("/contact/") ? 'black' : '#073a8c',
+                                color: isActive("/professional/profile") ? 'black' : '#073a8c',
                                 mr: 1,
                                 '&:hover': {
                                     backgroundColor: '#073a8c',
@@ -184,6 +171,19 @@ function DrawerAppBar(props) {
                             onClick={() => navigate(`/professional/profile/${user.username}`)}
                         >
                             <AccountCircleIcon />
+                        </Button>
+                        <Button
+                            sx={{
+                                color: isActive("/logout") ? 'black' : '#073a8c',
+                                mr: 1,
+                                '&:hover': {
+                                    backgroundColor: '#073a8c',
+                                    color: '#fff',
+                                },
+                            }}
+                            onClick={() => navigate('/logout')}
+                        >
+                            <ExitToAppIcon />
                         </Button>
                     </Box>
                 </Toolbar>

@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import UserInfoForm from './ProfileCreation/UserInfoForm';
 import ContactInfoForm from './ProfileCreation/ContactInfoForm';
 import { useAuth } from '../Token/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import API from '../Hooks/Api';
 
 function samePageLinkNavigation(event) {
     if (
@@ -44,6 +46,7 @@ LinkTab.propTypes = {
 };
 
 const CreateProfile = () => {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const [selectedTab, setSelectedTab] = React.useState(0); // 0 for "Grow", 1 for "Catch up"
     const [ userForm, setUserForm ] = React.useState({
@@ -76,8 +79,24 @@ const CreateProfile = () => {
         setSelectedTab(0);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("Form Submitted", userForm);
+        try{
+            const url = "http://localhost:9090/v1/api/users/add";
+            const response = await API.post(url, userForm);
+            if(response.status === 200) {
+                if(userForm.role === "PROFESSIONAL") {
+                    navigate(`/professional/profile/${user.username}`)
+                }
+                else if(userForm.role === "USER") {
+                    navigate(`/professional/profile/${user.username}`)
+                }
+            }
+
+        }
+        catch(err) {
+            console.log(err);
+        }
         // Submit the data to your server here
     };
     // Handle tab change
