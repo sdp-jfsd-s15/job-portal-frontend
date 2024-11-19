@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import ProfessionalMetaJobs from './ViewAllProfessionalJobs/ProfessionalMetaJobs';
 import IndividualJob from './ViewAllProfessionalJobs/IndividualJob';
-import { Typography } from '@mui/material';
+import SelectJobToView from './SelectJobToView';
 
 const ViewAllMyPostedJobs = () => {
   const [selectedJob, setSelectedJob] = React.useState(null); // Track the selected job
@@ -36,7 +36,7 @@ const ViewAllMyPostedJobs = () => {
               {selectedJob ? (
                 <IndividualJob job={selectedJob} /> // Pass the selected job to IndividualJob component
               ) : (
-                <Typography>Select a job to view details.</Typography>
+                <div><SelectJobToView /></div>
               )}
             </Box>
           </Grid>

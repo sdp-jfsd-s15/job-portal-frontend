@@ -48,7 +48,6 @@ export default function BottomNav({ value, handleChange }) {
         sx={{ '& .MuiTab-root': { color: '#000' }, '& .Mui-selected': { color: '#073a8c' } }}
       >
         <LinkTab label="Grow" />
-        <LinkTab label="Catch up" />
       </Tabs>
     </Box>
   );

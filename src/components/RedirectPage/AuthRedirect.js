@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Token/AuthContext"; // Adjust the path accordingly
+import Loading from "../Loading";
 
 const AuthRedirect = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const AuthRedirect = () => {
 
   return (
     <div>
-      <h2>Redirecting...</h2>
+      <h2><Loading /></h2>
     </div>
   );
 };

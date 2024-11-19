@@ -6,8 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GroupIcon from '@mui/icons-material/Group';
-import MessageIcon from '@mui/icons-material/Message';
-import ContactsIcon from '@mui/icons-material/Contacts';
 import Divider from '@mui/material/Divider';
 
 const ManageNetwork = () => {
@@ -41,43 +39,6 @@ const ManageNetwork = () => {
                         </Typography>
                         <Typography variant="body1" component="div" sx={{ flex: 1, textTransform: 'none', ml: 1, textAlign: 'right' }}> {/* Add margin to the left of the icon */}
                             321
-                        </Typography>
-                    </Button>
-                    <Button
-                        sx={{
-                            mt: 2,
-                            mr: 5, // Reduce margin between buttons
-                            color: "gray",
-                            width: "100%",
-                            display: 'flex', // Use flexbox layout
-                            justifyContent: 'flex-start', // Align content to the left
-                            alignItems: 'center', // Align items vertically in the center
-                        }}
-                        onClick={() => navigate("/professional/my-contacts")}
-                    >
-                        <ContactsIcon />
-                        <Typography variant="body1" component="div" sx={{ flex: 1, textTransform: 'none', ml: 1, textAlign: 'left' }}> {/* Add margin to the left of the icon */}
-                            Contacts
-                        </Typography>
-                        <Typography variant="body1" component="div" sx={{ flex: 1, textTransform: 'none', ml: 1, textAlign: 'right' }}> {/* Add margin to the left of the icon */}
-                            300
-                        </Typography>
-                    </Button>
-                    <Button
-                        sx={{
-                            mt: 2,
-                            mr: 5, // Reduce margin between buttons
-                            color: "gray",
-                            width: "100%",
-                            display: 'flex', // Use flexbox layout
-                            justifyContent: 'flex-start', // Align content to the left
-                            alignItems: 'center', // Align items vertically in the center
-                        }}
-                        onClick={() => navigate("/professional/my-contacts")}
-                    >
-                        <MessageIcon />
-                        <Typography variant="body1" component="div" sx={{ flex: 1, textTransform: 'none', ml: 1, textAlign: 'left' }}> {/* Add margin to the left of the icon */}
-                            Message
                         </Typography>
                     </Button>
                 </CardContent>

@@ -12,11 +12,14 @@ import ProfessionalHome from './components/Professional/ProfessionalHome';
 import MyNetwork from './components/Professional/P-Components/MyNetwork';
 import PProfile from './components/Professional/P-Components/PProfile';
 import ProfileRedirector from './components/RedirectPage/ProfileRedirector';
+import ProfileViewer from './components/ProfileViewer'
 import CreateProfile from './components/CreateProfile';
 import Jobs from './components/Professional/P-Components/Jobs';
 import PostAJob from './components/Professional/P-Components/Jobs/PostAJob';
 import LogoutRedirector from './components/RedirectPage/LogoutRedirector';
 import ViewAllMyPostedJobs from './components/Professional/P-Components/Jobs/ViewAllMyPostedJobs';
+// import Chat from './components/Professional/P-Components/Chat/Chat';
+import Message from './components/Chat/Message';
 
 const App = () => {
   return (
@@ -38,7 +41,8 @@ const App = () => {
           <Route path='post-a-job' element={<PostAJob />}/>
           <Route path='view-all-my-posted-jobs' element={<ViewAllMyPostedJobs />}/>
           <Route path='profile/:username' element={<PProfile />}/>
-          <Route path='messages' element={<></>}/>
+          <Route path='view-profile/:username' element={<ProfileViewer />}/>
+          <Route path='messages' element={<Message />}/>
         </Route>
         <Route path='/check-profile' element={<ProfileRedirector />}/>
         <Route path='/create-profile' element={<CreateProfile />}/>

@@ -27,18 +27,20 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
       } catch (err) {
         console.error(err);
       }
-    }
+    };
     fetchProfessionalJobs();
   }, [user.username]);
 
-  // Filter jobs based on active state and vacancies
-  const filteredJobs = jobs.filter((job) => {
-    if (showActiveJobs) {
-      return job.isPublish && job.vacancy > 0; // Only show active jobs with vacancies
-    } else {
-      return !job.isPublish || job.vacancy === 0; // Show inactive jobs or vacancies = 0
-    }
-  });
+  // Recalculate filtered jobs
+  const filteredJobs = React.useMemo(() => {
+    return jobs.filter((job) => {
+      if (showActiveJobs) {
+        return job.isPublish && job.vacancy > 0; // Only show active jobs with vacancies
+      } else {
+        return !job.isPublish || job.vacancy === 0; // Show inactive jobs or vacancies = 0
+      }
+    });
+  }, [jobs, showActiveJobs]);
 
   // Handle page change
   const handleChange = (event, value) => {
@@ -56,6 +58,12 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
   // Slice the filtered jobs array to show only the jobs for the current page
   const jobsToDisplay = filteredJobs.slice((page - 1) * jobsPerPage, page * jobsPerPage);
 
+  // Handle toggle switch and refresh filtered jobs
+  const handleToggle = () => {
+    setShowActiveJobs((prev) => !prev);
+    setPage(1); // Reset pagination to the first page
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -66,14 +74,14 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
           top: 0,
           left: 0,
           height: '100vh',
-          width: 400, // Adjust the width of the sidebar
+          width: 400,
           backgroundColor: 'white',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'flex-start',
           ml: 17,
-          p: 2, // Padding for spacing
+          p: 2,
         }}
       >
         <Typography variant="h6" component="div" sx={{ ml: 2, mb: 1 }}>
@@ -85,19 +93,19 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
           control={
             <Switch
               checked={showActiveJobs}
-              onChange={() => setShowActiveJobs(!showActiveJobs)}
+              onChange={handleToggle}
               name="loading"
               color="primary"
             />
           }
-          label={showActiveJobs ? "Show Active Jobs" : "Show Disabled Jobs"}
+          label={showActiveJobs ? 'Show Active Jobs' : 'Show Disabled Jobs'}
         />
 
         {/* Job Cards Container with Scroll */}
         <Box
           sx={{
             width: '100%',
-            maxHeight: 500, // Max height to enable scrolling
+            maxHeight: 500,
             overflowY: 'auto',
           }}
         >
@@ -105,8 +113,7 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
             <Card
               key={job.id}
               sx={{ mb: 1, width: '100%', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-              onClick={() => handleJobClick(job)} // Call onJobClick with selected job
-              
+              onClick={() => handleJobClick(job)}
             >
               {/* Icon on the left side */}
               <Box sx={{ padding: 1 }}>
@@ -116,7 +123,9 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
               {/* Job Content on the right side */}
               <Box sx={{ flexGrow: 1, padding: 1 }}>
                 <CardContent sx={{ padding: 0 }}>
-                  <Typography variant="h6" sx={{ color: 'darkblue' }}><b>{job.title}</b></Typography>
+                  <Typography variant="h6" sx={{ color: 'darkblue' }}>
+                    <b>{job.title}</b>
+                  </Typography>
                   <Typography variant="body2" color="black">
                     {job.company}
                   </Typography>
@@ -135,10 +144,10 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
         {/* Pagination */}
         <center>
           <Pagination
-            count={Math.ceil(filteredJobs.length / jobsPerPage)} // Calculate number of pages based on filtered jobs per page
+            count={Math.ceil(filteredJobs.length / jobsPerPage)}
             page={page}
             onChange={handleChange}
-            sx={{ marginTop: 1, width: '100%' }} // Ensure pagination fits within the width of the Box
+            sx={{ marginTop: 1, width: '100%' }}
           />
         </center>
       </Box>

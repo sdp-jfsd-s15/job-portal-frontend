@@ -11,6 +11,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import EditJobDialog from './EditJobDialog';
 import API from '../../../../../Hooks/Api';
 import { useAuth } from '../../../../../Token/AuthContext';
+import SelectJobToView from '../SelectJobToView';
 
 const IndividualJob = ({ job }) => {
   const { user } = useAuth();
@@ -200,7 +201,7 @@ const IndividualJob = ({ job }) => {
             </CardContent>
           </Card>
         ) : (
-          <Typography variant="h6">Select a job to see details</Typography>
+          <div><SelectJobToView /></div>
         )}
         <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
           <EditJobDialog

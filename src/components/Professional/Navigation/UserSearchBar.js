@@ -49,7 +49,7 @@ const UserSearchBar = () => {
     };
 
     const handleUserClick = (userName) => {
-        navigate(`/view-profile/${userName}`);
+        navigate(`/professional/view-profile/${userName}`);
         setSuggestions([]); // Close the suggestions box
     };
 

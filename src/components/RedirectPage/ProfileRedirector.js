@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Token/AuthContext';
 import API from '../../Hooks/Api';
+import Loading from '../Loading';
 
 const ProfileRedirector = () => {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const ProfileRedirector = () => {
     }, [navigate, user]);
 
     return (
-        <div>Loading......</div>
+        <div><Loading /></div>
     );
 };
 

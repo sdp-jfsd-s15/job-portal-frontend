@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading';
 
 const LogoutRedirector = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const LogoutRedirector = () => {
         handleLogout();
     }, [navigate]);
 
-    return <div>Loading.......</div>;
+    return <div><Loading /></div>;
 };
 
 export default LogoutRedirector;
