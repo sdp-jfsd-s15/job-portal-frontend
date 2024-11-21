@@ -53,11 +53,12 @@ const MetaInfo = ({ userdetails }) => {
             try {
                 const url = `/v1/api/connections/checkConnection/${userdetails.userName}`;
                 const response = await API.get(url);
+                console.log(response.status);
                 if (response.status === 200) {
                     setConnectionStatus("ACCEPTED");
                 } else if (response.status === 202) {
                     setConnectionStatus("PENDING");
-                } else {
+                } else if(response.status === 204){
                     setConnectionStatus("");
                 }
             } catch (err) {
@@ -111,9 +112,7 @@ const MetaInfo = ({ userdetails }) => {
                         </Typography>
                     )}
                 </Box>
-                <Typography variant="subtitle2">
-                    {userdetails.summary}
-                </Typography>
+                <div dangerouslySetInnerHTML={{ __html: userdetails.summary }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
                     <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
                         {userdetails.location}

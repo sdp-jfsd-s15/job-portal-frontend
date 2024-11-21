@@ -11,6 +11,7 @@ import ContactInfoForm from './ProfileCreation/ContactInfoForm';
 import { useAuth } from '../Token/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import API from '../Hooks/Api';
+import PersonalInfo from './ProfileCreation/PersonalInfo';
 
 function samePageLinkNavigation(event) {
     if (
@@ -49,39 +50,43 @@ const CreateProfile = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [selectedTab, setSelectedTab] = React.useState(0); // 0 for "Grow", 1 for "Catch up"
-    const [ userForm, setUserForm ] = React.useState({
+    const [userForm, setUserForm] = React.useState({
         "email": user.email,
         "userName": user.username,
-        "firstName":"",
-        "middleName":"",
-        "lastName":"",
-        "role":"",
-        "gender":"",
-        "contactInfo":{
-            "address":"",
-            "birthday":"",
-            "email":user.email,
-            "phone":""
+        "firstName": "",
+        "middleName": "",
+        "lastName": "",
+        "role": "",
+        "gender": "",
+        "contactInfo": {
+            "address": "",
+            "birthday": "",
+            "email": user.email,
+            "phone": ""
         },
-        "resumeurl":"",
-        "profilePictureUrl":"",
-        "backgroundImageUrl":"",
-        "summary":"",
-        "about":"",
-        "location":""
+        "resumeurl": "",
+        "profilePictureUrl": "",
+        "backgroundImageUrl": "",
+        "summary": "",
+        "about": "",
+        "location": ""
 
     })
     const handleNext = () => {
-        setSelectedTab(1);
+        if (selectedTab < 2) { // Adjust this number to the total tabs - 1
+            setSelectedTab((prev) => prev + 1);
+        }
     };
 
     const handlePrev = () => {
-        setSelectedTab(0);
+        if (selectedTab > 0) {
+            setSelectedTab((prev) => prev - 1);
+        }
     };
 
     const handleSubmit = async () => {
         console.log("Form Submitted", userForm);
-        try{
+        try {
             const url = "http://localhost:9090/v1/api/users/add";
             const response = await API.post(url, userForm);
             if(response.status === 200) {
@@ -94,7 +99,7 @@ const CreateProfile = () => {
             }
 
         }
-        catch(err) {
+        catch (err) {
             console.log(err);
         }
         // Submit the data to your server here
@@ -120,14 +125,19 @@ const CreateProfile = () => {
                             '& .Mui-selected': { color: '#073a8c' },
                         }}
                     >
+
                         <LinkTab label="User Info" />
                         <LinkTab label="Contact Info" />
+                        <LinkTab label="Personal Info" />
                     </Tabs>
                     {selectedTab === 0 && (
                         <UserInfoForm userForm={userForm} setUserForm={setUserForm} onNext={handleNext} />
                     )}
                     {selectedTab === 1 && (
-                        <ContactInfoForm userForm={userForm} setUserForm={setUserForm} onSubmit={handleSubmit} onPrev={handlePrev} />
+                        <ContactInfoForm userForm={userForm} setUserForm={setUserForm} onNext={handleNext} onPrev={handlePrev} />
+                    )}
+                    {selectedTab === 2 && (
+                        <PersonalInfo userForm={userForm} setUserForm={setUserForm} onSubmit={handleSubmit} onPrev={handlePrev} />
                     )}
                 </Box>
             </Container>

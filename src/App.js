@@ -1,4 +1,5 @@
 import React from 'react';
+import "./App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './components/WelcomePage/Welcome';
 import Signin from './components/Signin-Signup/Signin';
@@ -18,12 +19,12 @@ import Jobs from './components/Professional/P-Components/Jobs';
 import PostAJob from './components/Professional/P-Components/Jobs/PostAJob';
 import LogoutRedirector from './components/RedirectPage/LogoutRedirector';
 import ViewAllMyPostedJobs from './components/Professional/P-Components/Jobs/ViewAllMyPostedJobs';
-// import Chat from './components/Professional/P-Components/Chat/Chat';
+// import Chat from './components/Chat/Chat';
 import Message from './components/Chat/Message';
 
 const App = () => {
   return (
-    <div style={{ backgroundColor: "#f4f2ee" }}>
+    <div className="app-container">
     <AuthProvider>
     <BrowserRouter>
       <Routes>

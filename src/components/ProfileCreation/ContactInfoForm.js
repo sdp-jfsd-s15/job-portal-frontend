@@ -15,7 +15,7 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
-const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
+const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
     const [country, setCountry] = useState(userForm.contactInfo.country || '');
     const [state, setState] = useState(userForm.contactInfo.state || '');
 
@@ -181,7 +181,17 @@ const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
                 </Grid>
             </Grid>
             <Grid container spacing={2} sx={{ mt: 2 }}>
-                <Grid item xs={6}>
+                {/* <Grid item xs={12}>
+                    <FormControl fullWidth>
+                        <FormLabel>Summary</FormLabel>
+                        <JoditEditor
+                            ref={editor}
+                            value={userForm.summary}
+                            onChange={handleChange}
+                        />
+                    </FormControl>
+                </Grid> */}
+                {/* <Grid item xs={6}>
                     <TextField
                         label="Summary"
                         variant="outlined"
@@ -191,8 +201,18 @@ const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
                         value={userForm.summary}
                         onChange={handleChange}
                     />
-                </Grid>
-                <Grid item xs={6}>
+                </Grid> */}
+                {/* <Grid item xs={12}>
+                    <FormControl fullWidth>
+                        <FormLabel>About</FormLabel>
+                        <JoditEditor
+                            ref={editor}
+                            value={userForm.about}
+                            onChange={handleChange}
+                        />
+                    </FormControl>
+                </Grid> */}
+                {/* <Grid item xs={6}>
                     <TextField
                         label="About"
                         variant="outlined"
@@ -202,7 +222,7 @@ const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
                         value={userForm.about}
                         onChange={handleChange}
                     />
-                </Grid>
+                </Grid> */}
             </Grid>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                 <Button
@@ -228,12 +248,19 @@ const ContactInfoForm = ({ userForm, setUserForm, onSubmit, onPrev }) => {
                     PREV
                 </Button>
                 <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={onNext}
+                    >
+                        Next
+                    </Button>
+                {/* <Button
                     variant="contained"
                     color="primary"
                     onClick={onSubmit}
                 >
                     Submit
-                </Button>
+                </Button> */}
             </Box>
         </Box>
     );

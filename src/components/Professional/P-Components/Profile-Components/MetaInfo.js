@@ -64,9 +64,7 @@ const MetaInfo = ({ userdetails }) => {
                         </Typography>
                     )}
                 </Box>
-                <Typography variant="subtitle2">
-                    {userdetails.summary}
-                </Typography>
+                <div dangerouslySetInnerHTML={{ __html: userdetails.summary }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
                     <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
                         {userdetails.location}

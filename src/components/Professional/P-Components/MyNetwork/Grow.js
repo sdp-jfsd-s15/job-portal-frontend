@@ -11,6 +11,7 @@ const Grow = () => {
       const url = `/v1/api/connections/updateConnection/${userName}/ACCEPTED`;
       const response = await API.put(url); // Send the PUT request to the API
       console.log('Connection accepted:', response.data); // Optionally log the response data
+      window.location.reload();
     } catch (err) {
       console.log('Error accepting connection:', err); // Log any error that occurs
     }
@@ -22,6 +23,7 @@ const Grow = () => {
       const url = `/v1/api/connections/updateConnection/${userName}/REJECTED`;
       const response = await API.put(url); // Send the PUT request to the API
       console.log('Connection accepted:', response.data); // Optionally log the response data
+      window.location.reload();
     } catch (err) {
       console.log('Error accepting connection:', err); // Log any error that occurs
     }

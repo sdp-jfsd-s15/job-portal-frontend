@@ -15,7 +15,7 @@ const AboutMe = ({ userdetails }) => {
       </Typography>
       <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
     </Box>
-    {userdetails.about}
+    <div dangerouslySetInnerHTML={{ __html: userdetails.about }} />
   </CardContent>
 </Card>
   )

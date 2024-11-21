@@ -3,12 +3,14 @@ import { IconButton, InputBase, Paper, Box, List, ListItem, ListItemButton, List
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import API from '../../../Hooks/Api';
+import { useAuth } from '../../../Token/AuthContext';
 
 const UserSearchBar = () => {
     const [searchText, setSearchText] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const navigate = useNavigate();
     const wrapperRef = useRef(null);
+    const { user } = useAuth();
 
     const fetchUsers = async () => {
         try {
@@ -49,6 +51,13 @@ const UserSearchBar = () => {
     };
 
     const handleUserClick = (userName) => {
+        if(user.username === userName) {
+            setSuggestions([]);
+            setSearchText("");
+            navigate(`/professional/profile/${userName}`);
+            return;
+        }
+        setSearchText("");
         navigate(`/professional/view-profile/${userName}`);
         setSuggestions([]); // Close the suggestions box
     };
