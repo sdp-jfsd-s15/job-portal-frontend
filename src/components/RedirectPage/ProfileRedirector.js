@@ -21,7 +21,19 @@ const ProfileRedirector = () => {
                 const response = await API.get(url);
 
                 if (response.status === 200) {
-                    navigate(`/professional/profile/${user.username}`);
+                    const role = response.data.role;
+                    if(role === "PROFESSIONAL"){
+                        navigate(`/professional/`);
+                    }
+                    else if(role === "USER"){
+                        navigate(`/user/`);
+                    }
+                    else if(role === "ADMIN"){
+                        navigate(`/admin/`);
+                    }
+                    else if(role === "CUSTOMER SUPPORT") {
+                        navigate(`/customer-support/`);
+                    }
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {

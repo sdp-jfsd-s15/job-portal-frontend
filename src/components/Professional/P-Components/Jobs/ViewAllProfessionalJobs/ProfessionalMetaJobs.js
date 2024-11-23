@@ -53,7 +53,7 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
   };
 
   // Number of jobs per page (cards to display)
-  const jobsPerPage = 5;
+  const jobsPerPage = 3;
 
   // Slice the filtered jobs array to show only the jobs for the current page
   const jobsToDisplay = filteredJobs.slice((page - 1) * jobsPerPage, page * jobsPerPage);

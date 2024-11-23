@@ -10,6 +10,7 @@ import backgroundImageP from "../../../../images/profileBackgroundStatic.jpeg";
 import ProfileImage from "../../../../images/profileImage.jpeg";
 import { Button, CardActions, Link } from '@mui/material';
 import ContactInfoPop from './ContactInfoPop';
+import { useNavigate } from 'react-router-dom';
 
 // Styled component for positioning the Avatar
 const AvatarWrapper = styled(Box)({
@@ -28,6 +29,7 @@ const ProfileAvatar = styled(Avatar)({
 });
 
 const MetaInfo = ({ userdetails }) => {
+    const navigate = useNavigate();
     const [isPopupOpen, setPopupOpen] = React.useState(false);
 
     const handleOpenPopup = () => {
@@ -37,6 +39,18 @@ const MetaInfo = ({ userdetails }) => {
     const handleClosePopup = () => {
         setPopupOpen(false);
     };
+
+    const handleConnectionClick = () => {
+        const currentPath = window.location.pathname;
+        let targetPath = "";
+        if (currentPath.startsWith("/professional/profile")) {
+            targetPath = `/professional/connection-details/${userdetails.connectionsCount}/${userdetails.userName}`;
+        } else if (currentPath.startsWith("/user/profile")) {
+            targetPath = `/user/connection-details/${userdetails.connectionsCount}/${userdetails.userName}`;
+        }
+        navigate(targetPath)
+    }
+    
     return (
         <Card sx={{ width: '100%', height: '500px', position: 'relative' }}>
             <CardMedia
@@ -72,9 +86,14 @@ const MetaInfo = ({ userdetails }) => {
                     <Link sx={{ cursor: 'pointer' }} onClick={handleOpenPopup}>
                         Contact Info
                     </Link>
-                    <ContactInfoPop open={isPopupOpen} onClose={handleClosePopup} contactDetails={userdetails.contactInfo}/>
+                    <ContactInfoPop open={isPopupOpen} onClose={handleClosePopup} contactDetails={userdetails.contactInfo} />
                 </Box>
             </CardContent>
+            <CardActions sx={{ marginLeft: 2, marginBottom: -2 }}>
+                <Link style={{ cursor: 'pointer' }} onClick={() => {handleConnectionClick()}}>
+                    {userdetails.connectionsCount} Connections
+                </Link>
+            </CardActions>
             <CardActions sx={{ marginLeft: 1 }}>
                 <Button
                     variant="contained"

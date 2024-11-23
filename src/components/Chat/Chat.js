@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import client from "../../websocket-server";
-import API from "../../Hooks/Api";
+// import { groupMessagesByDate } from "../utils/groupMessagesByDate";
+// import API from "../../Hooks/Api";
 import { Avatar, Box, Card, CardContent, FormControl, IconButton, TextField, Typography } from "@mui/material";
 
 
@@ -8,28 +9,32 @@ const Chat = ({ receiverUserName, senderUserName, activeUser }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
-    useEffect(() => {
-        if (!senderUserName || !receiverUserName) {
-            console.log("No Username");
-            return;
-        }
+    // useEffect(() => {
+    //     if (!senderUserName || !receiverUserName) {
+    //         console.log("No Username");
+    //         return;
+    //     }
 
-        const fetchChatHistory = async () => {
-            try {
-                const response = await API.get(`/v1/api/chat/history?sender=${senderUserName}&receiver=${receiverUserName}`);
-                if (!response.ok) throw new Error("Failed to fetch chat history");
-                const data = await response.json();
-                const sortedMessages = data.flatMap(chat => chat.chatHistory).sort(
-                    (a, b) => new Date(a.sentDateAndTime) - new Date(b.sentDateAndTime)
-                );
-                setMessages(sortedMessages);
-            } catch (error) {
-                console.error("Error fetching chat history:", error);
-            }
-        };
+    //     const fetchChatHistory = async () => {
+    //         try {
+    //             const response = await API.get(`/v1/api/chat/history/${senderUserName}/${receiverUserName}`);
+    //             const chatData = response.data;
+        
+        
+    //                 // Extract and sort chat history by sentDateAndTime
+    //                 const sortedMessages = chatData.chatHistory.sort(
+    //                     (a, b) => new Date(a.sentDateAndTime) - new Date(b.sentDateAndTime)
+    //                 );
+        
+    //                 setMessages(sortedMessages);
+        
+    //         } catch (error) {
+    //             console.error("Error fetching chat history:", error);
+    //         }
+    //     };
 
-        fetchChatHistory();
-    }, [senderUserName, receiverUserName]);
+    //     fetchChatHistory();
+    // }, [senderUserName, receiverUserName]);
 
     useEffect(() => {
         if (!senderUserName || !receiverUserName) return;

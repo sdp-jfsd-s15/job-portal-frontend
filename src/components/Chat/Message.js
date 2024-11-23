@@ -5,17 +5,20 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LeftSidebar } from './LeftSidebar';
 import { ChatArea } from './ChatArea';
 import ConnectionsSearch from './ConnectionsSearch';
 import API from '../../Hooks/Api';
+import { useParams } from 'react-router-dom';
 
 const Message = () => {
   const [usersConnection, setUsersConnection] = useState([]); // All connections
   const [filteredConnections, setFilteredConnections] = useState([]); // Filtered connections based on search
+  const [activeUser, setActiveUser] = useState(null);
+  const { username, firstName, lastName } = useParams(); // Extract URL params
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchConnectionOfUser = async () => {
       try {
         const url = "/v1/api/connections/get";
@@ -27,16 +30,31 @@ const Message = () => {
         console.log(err);
       }
     };
-    fetchConnectionOfUser();
-  }, []);
 
-  const [activeUser, setActiveUser] = useState(null);
+    fetchConnectionOfUser();
+
+    // If parameters are available in the URL, set activeUser
+    if (username && firstName && lastName) {
+      const userFromParams = {
+        userName: username,
+        firstName: firstName,
+        lastName: lastName,
+      };
+      setActiveUser(userFromParams);
+    } else {
+      // Check sessionStorage for an active user
+      const storedActiveUser = sessionStorage.getItem("activeUser");
+      if (storedActiveUser) {
+        setActiveUser(JSON.parse(storedActiveUser));
+      }
+    }
+  }, [username, firstName, lastName]);
 
   const handleUserClick = (user) => {
     setActiveUser(user);
+    sessionStorage.setItem("activeUser", JSON.stringify(user));
   };
 
-  // This will be passed to the ConnectionsSearch component
   const handleSearch = (searchText) => {
     if (!searchText) {
       setFilteredConnections(usersConnection); // Show all if no search
@@ -57,11 +75,11 @@ const Message = () => {
         <Box
           sx={{
             bgcolor: 'white',
-            height: 'calc(100vh - 48px)', // Ensure it fills the remaining viewport height
+            height: 'calc(100vh - 48px)',
             padding: 2,
             borderRadius: '8px',
             display: 'flex',
-            flexDirection: 'column', // Flex column for header and content
+            flexDirection: 'column',
           }}
         >
           {/* Header Section */}
@@ -83,8 +101,8 @@ const Message = () => {
           <Grid
             container
             sx={{
-              flex: 1, // Allow the content section to expand
-              overflow: 'hidden', // Prevent overflow of the grid container
+              flex: 1,
+              overflow: 'hidden',
             }}
           >
             <Grid
@@ -92,7 +110,7 @@ const Message = () => {
               sx={{
                 width: '40%',
                 paddingRight: 0,
-                overflowY: 'auto', // Enable scrolling for the LeftSidebar
+                overflowY: 'auto',
                 maxHeight: '100%',
               }}
             >
@@ -105,8 +123,8 @@ const Message = () => {
                 paddingLeft: 0,
                 display: 'flex',
                 flexDirection: 'column',
-                height: '100%', // Ensure ChatArea takes full height
-                overflow: 'hidden', // Prevent overflow
+                height: '100%',
+                overflow: 'hidden',
               }}
             >
               <ChatArea activeUser={activeUser} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import { Box, CardContent, Divider, Typography, Tooltip } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -6,7 +6,21 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const URLLinks = ({ userdetails }) => {
     const [copySuccess, setCopySuccess] = React.useState(false);
-    const textToCopy = `http://localhost:3000/professional/profile/${userdetails.userName}`;
+    const [ textToCopy, setTextToCopy ] = React.useState('');
+
+    useEffect(() => {
+        const handleTextToCopy = () => {
+            const currentPath = window.location.pathname;
+            let targetPath = "";
+            if (currentPath.startsWith("/professional/profile")) {
+                targetPath = `http://localhost:3000/professional/profile/${userdetails.userName}`;
+            } else if (currentPath.startsWith("/user/profile")) {
+                targetPath = `http://localhost:3000/user/profile/${userdetails.userName}`;
+            }
+            setTextToCopy(targetPath);
+        }
+        handleTextToCopy();
+    }, [userdetails.userName]);
 
     const handleCopy = async () => {
         try {
@@ -24,14 +38,14 @@ const URLLinks = ({ userdetails }) => {
             <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography gutterBottom variant="h6" component="div">
-                        <b>Profile Language</b><br/>
+                        <b>Profile Language</b><br />
                     </Typography>
                     <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
                 </Box>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
                     English || <b>Role:</b>{userdetails.role}
                 </Typography>
-                
+
                 <Divider sx={{ marginTop: 2, marginBottom: 2 }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography gutterBottom variant="h6" component="div">
@@ -43,7 +57,7 @@ const URLLinks = ({ userdetails }) => {
                     <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
                 </Box>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
-                    http://localhost:3000/professional/profile/<br />{userdetails.userName}
+                    {textToCopy}
                 </Typography>
             </CardContent>
         </Card>

@@ -30,6 +30,12 @@ const PostAJob = () => {
         filters: [],
     });
 
+    const [jobTypes, setJobTypes] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [skillsOptions, setSkillsOptions] = useState([]);
+    const [filterOptions, setFilterOptions] = useState([]);
+
+
     useEffect(() => {
         // Update jobForm with description and qualification contents
         setJobForm((prevJobForm) => ({
@@ -38,6 +44,25 @@ const PostAJob = () => {
             qualifications: qualificationContent,
         }));
     }, [descriptionContent, qualificationContent]);
+
+    useEffect(() => {
+        const fetchFilters = async () => {
+            try {
+                const url = "/v1/api/filter/filters";
+                const response = await API.get(url);
+                const data = response.data;
+                setJobTypes(data.jobType);
+                setCategories(data.jobCategory);
+                setSkillsOptions(data.skills);
+                setFilterOptions(data.jobCategory);
+                console.log(response.data);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+        fetchFilters();
+    }, [])
 
     const [country, setCountry] = useState('');
     const [state, setState] = useState('');
@@ -80,7 +105,7 @@ const PostAJob = () => {
     const handleAddNewOption = () => {
         if (newOption.trim() !== '') {
             console.log("Adding new option to:", selectedField, "Option:", newOption);
-    
+
             // Ensure selectedField is either 'skills' or 'filters' before modifying them
             if (selectedField === 'skills' || selectedField === 'filters') {
                 // Add the new option to the array
@@ -98,7 +123,7 @@ const PostAJob = () => {
                     [selectedField]: newOption
                 }));
             }
-    
+
             handleCloseDialog();
         }
     };
@@ -109,11 +134,6 @@ const PostAJob = () => {
         const { value } = e.target;
         setJobForm({ ...jobForm, [field]: typeof value === 'string' ? value.split(',') : value });
     };
-
-    const jobTypes = ['Full-Time', 'Part-Time', 'Contract', 'Internship', 'Temporary', 'Freelancer'];
-    const categories = ['Software Development', 'Data Science', 'Design', 'Marketing'];
-    const skillsOptions = ['Java', 'Spring Boot', 'React', 'SQL', 'Python', 'Node.js'];
-    const filterOptions = ['Web Development', 'Full Stack', 'Backend Development', 'Frontend Development'];
 
     const handleSubmit = async () => {
         const cleanedJobForm = {

@@ -6,6 +6,6 @@ export const ChatArea = ({ activeUser }) => {
   const { user } = useAuth();
 
   return (
-   <Chat receiverUserName={activeUser?.userName} senderUserName={user.username} activeUser={activeUser} />
+    <Chat receiverUserName={activeUser?.userName} senderUserName={user.username} activeUser={activeUser} />
   );
 };

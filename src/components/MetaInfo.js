@@ -12,6 +12,7 @@ import { Button, CardActions, Link, CircularProgress } from '@mui/material';
 import ContactInfoPop from './ContactInfoPop';
 import AddIcon from '@mui/icons-material/Add';
 import API from '../Hooks/Api';
+import { useNavigate } from 'react-router-dom';
 
 // Styled component for positioning the Avatar
 const AvatarWrapper = styled(Box)({
@@ -30,6 +31,7 @@ const ProfileAvatar = styled(Avatar)({
 });
 
 const MetaInfo = ({ userdetails }) => {
+    const navigate = useNavigate();
     const [isPopupOpen, setPopupOpen] = React.useState(false);
     const [connectionStatus, setConnectionStatus] = React.useState("");
 
@@ -70,12 +72,29 @@ const MetaInfo = ({ userdetails }) => {
         // Set a timeout to delay the API call
         const timeoutId = setTimeout(() => {
             checkConnection();
-        }, 2000); // Change to 3000 for 3 seconds
+        }, 1000); // Change to 3000 for 3 seconds
     
         // Cleanup timeout when component unmounts or `userdetails.userName` changes
         return () => clearTimeout(timeoutId);
     }, [userdetails.userName]);
     
+    const handleConnectionClick = () => {
+        const currentPath = window.location.pathname;
+        let targetPath = "";
+
+        if (currentPath.startsWith("/professional/view-profile/")) {
+            targetPath = `/professional/connection-details/${userdetails.connectionsCount}/${userdetails.userName}`;
+        } else if (currentPath.startsWith("/user/view-profile/")) {
+            targetPath = `/user/connection-details/${userdetails.connectionsCount}/${userdetails.userName}`;
+        }
+
+        if (targetPath) {
+            navigate(targetPath);
+        } else {
+            console.error("Invalid path for navigation.");
+        }
+        // navigate(`/professional/connection-details/${userdetails.connectionsCount}/${userdetails.userName}`)
+    }
 
     const handleOpenPopup = () => {
         setPopupOpen(true);
@@ -123,6 +142,11 @@ const MetaInfo = ({ userdetails }) => {
                     <ContactInfoPop open={isPopupOpen} onClose={handleClosePopup} contactDetails={userdetails.contactInfo} />
                 </Box>
             </CardContent>
+            <CardActions sx={{ marginLeft: 2, marginBottom: -2 }}>
+                <Link style={{ cursor: 'pointer' }} onClick={() => {handleConnectionClick()}}>
+                    {userdetails.connectionsCount} Connections
+                </Link>
+            </CardActions>
             <CardActions sx={{ marginLeft: 1 }}>
                 {connectionStatus === "ACCEPTED" && (
                     <Button

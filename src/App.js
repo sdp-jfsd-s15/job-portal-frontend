@@ -21,6 +21,10 @@ import LogoutRedirector from './components/RedirectPage/LogoutRedirector';
 import ViewAllMyPostedJobs from './components/Professional/P-Components/Jobs/ViewAllMyPostedJobs';
 // import Chat from './components/Chat/Chat';
 import Message from './components/Chat/Message';
+import MyConnections from './components/Professional/P-Components/MyNetwork/MyConnections';
+import UserDashboard from './components/User/UserDashboard';
+import UserHome from './components/User/UserHome';
+import UserJobPage from './components/User/UserJobPage';
 
 const App = () => {
   return (
@@ -44,6 +48,20 @@ const App = () => {
           <Route path='profile/:username' element={<PProfile />}/>
           <Route path='view-profile/:username' element={<ProfileViewer />}/>
           <Route path='messages' element={<Message />}/>
+          <Route path='messages/:username/:firstName/:lastName' element={<Message />}/>
+          <Route path='my-connections' element={<MyConnections />}/>
+          <Route path='connection-details/:connectionCount/:userName' element={<MyConnections />}/>
+        </Route>
+        <Route path='/user/*' element={<UserDashboard />}>
+         <Route path='' element={<UserHome />}/>
+         <Route path='my-network' element={<MyNetwork />}/>
+         <Route path='my-connections' element={<MyConnections />}/>
+         <Route path='connection-details/:connectionCount/:userName' element={<MyConnections />}/>
+         <Route path='messages' element={<Message />}/>
+         <Route path='messages/:username/:firstName/:lastName' element={<Message />}/>
+         <Route path='view-profile/:username' element={<ProfileViewer />}/>
+         <Route path='profile/:username' element={<PProfile />}/>
+         <Route path='work' element={<UserJobPage />}/>
         </Route>
         <Route path='/check-profile' element={<ProfileRedirector />}/>
         <Route path='/create-profile' element={<CreateProfile />}/>
