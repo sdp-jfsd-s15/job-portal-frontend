@@ -178,7 +178,10 @@ const PostAJob = () => {
         <Container maxWidth="md" style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
             <Grid container spacing={2} style={{ paddingBottom: 10 }}>
                 <Grid item xs={4}>
-                    <ArrowBackIcon onClick={() => navigate("/professional/work/")} />
+                    <ArrowBackIcon
+                        onClick={() => navigate("/professional/work/")}
+                        style={{ cursor: "pointer" }}
+                    />
                 </Grid>
                 <Grid item xs={8}>
                     <Typography variant="h6" component="div" sx={{ ml: 2, mb: 2 }}>

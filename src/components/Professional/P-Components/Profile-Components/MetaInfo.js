@@ -52,7 +52,7 @@ const MetaInfo = ({ userdetails }) => {
     }
     
     return (
-        <Card sx={{ width: '100%', height: '500px', position: 'relative' }}>
+        <Card sx={{ width: '100%', position: 'relative' }}>
             <CardMedia
                 component="img"
                 height="194"

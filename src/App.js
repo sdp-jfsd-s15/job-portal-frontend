@@ -25,6 +25,10 @@ import MyConnections from './components/Professional/P-Components/MyNetwork/MyCo
 import UserDashboard from './components/User/UserDashboard';
 import UserHome from './components/User/UserHome';
 import UserJobPage from './components/User/UserJobPage';
+import ViewJob from './components/User/Jobs/ViewJob';
+import MaterialUITable from './components/MaterialUITable';
+import SavedJobs from './components/User/Jobs/SavedJobs';
+import ViewJobFromProfile from './components/User/Jobs/ViewJobFromProfile';
 
 const App = () => {
   return (
@@ -62,10 +66,14 @@ const App = () => {
          <Route path='view-profile/:username' element={<ProfileViewer />}/>
          <Route path='profile/:username' element={<PProfile />}/>
          <Route path='work' element={<UserJobPage />}/>
+         <Route path='view-saved-jobs' element={<SavedJobs />}/>
+         <Route path='view-job/:id' element={<ViewJob />}/>
+         <Route path='view-job-applied/:id' element={<ViewJobFromProfile />}/>
         </Route>
         <Route path='/check-profile' element={<ProfileRedirector />}/>
         <Route path='/create-profile' element={<CreateProfile />}/>
         <Route path='/logout' element={<LogoutRedirector />}/>
+        <Route path='/savePdf' element={<MaterialUITable />}/>
       </Routes>
     </BrowserRouter>
     </AuthProvider>

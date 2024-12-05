@@ -94,7 +94,7 @@ const CreateProfile = () => {
                     navigate(`/professional/profile/${user.username}`)
                 }
                 else if(userForm.role === "USER") {
-                    navigate(`/professional/profile/${user.username}`)
+                    navigate(`/user/profile/${user.username}`)
                 }
             }
 
