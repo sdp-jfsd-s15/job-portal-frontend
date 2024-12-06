@@ -12,13 +12,15 @@ import EditJobDialog from './EditJobDialog';
 import API from '../../../../../Hooks/Api';
 import { useAuth } from '../../../../../Token/AuthContext';
 import SelectJobToView from '../SelectJobToView';
+import { useNavigate } from 'react-router-dom';
 
 const IndividualJob = ({ job }) => {
   const { user } = useAuth();
-  const [ newVacancy, setNewVacancy ] = React.useState(0);
+  const [newVacancy, setNewVacancy] = React.useState(0);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [isPublish, setIsPublish] = React.useState(job.isPublish);
   const [vacancyDialogOpen, setVacancyDialogOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDisableJob = async () => {
     try {
@@ -88,6 +90,10 @@ const IndividualJob = ({ job }) => {
     }
   };
 
+  const handleViewApplicants = (id) => {
+    navigate(`/professional/view-applicants/${id}`)
+  }
+
   const timeAgo = (inputDate) => {
     const now = new Date();
     const past = new Date(inputDate);
@@ -117,7 +123,6 @@ const IndividualJob = ({ job }) => {
           marginTop: 0,
           top: 0,
           left: 0,
-          height: '100vh',
           // width: 400, // Adjust the width of the sidebar
           backgroundColor: 'white',
           display: 'flex',
@@ -198,6 +203,16 @@ const IndividualJob = ({ job }) => {
               <div dangerouslySetInnerHTML={{ __html: job.description }} />
               <Typography variant='body1' sx={{ marginTop: 2 }}><b>Qualifications:</b></Typography>
               <div dangerouslySetInnerHTML={{ __html: job.qualifications }} />
+              <Box sx={{ marginTop: 2 }}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  onClick={() => {handleViewApplicants(job.id)}} // Your handler function for viewing applicants
+                >
+                  View Applicants
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         ) : (
