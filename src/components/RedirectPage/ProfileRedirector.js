@@ -23,10 +23,10 @@ const ProfileRedirector = () => {
                 if (response.status === 200) {
                     const role = response.data.role;
                     if(role === "PROFESSIONAL"){
-                        navigate(`/professional/`);
+                        navigate(`/professional/profile/${user.username}`);
                     }
                     else if(role === "USER"){
-                        navigate(`/user/`);
+                        navigate(`/user/profile/${user.username}`);
                     }
                     else if(role === "ADMIN"){
                         navigate(`/admin/`);

@@ -91,7 +91,7 @@ const IndividualJob = ({ job }) => {
   };
 
   const handleViewApplicants = (id) => {
-    navigate(`/professional/view-applicants/${id}`)
+    navigate(`/professional/view-applicants/${id}/${job.company}`)
   }
 
   const timeAgo = (inputDate) => {

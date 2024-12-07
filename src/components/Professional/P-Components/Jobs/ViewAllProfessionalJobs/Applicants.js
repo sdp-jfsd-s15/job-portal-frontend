@@ -19,13 +19,17 @@ import {
     Grid,
 } from '@mui/material';
 import API from '../../../../../Hooks/Api';
+import RejectedAppliciants from './RejectedAppliciants';
+import SelectedApplicants from './SelectedApplicants';
+import AllApplicants from './AllApplicants';
 
 const Applicants = () => {
     const { id } = useParams();
+    const { company } = useParams();
     const [data, setData] = useState({});
     const navigate = useNavigate();
-    const [selectedUsernames, setSelectedUsernames] = useState([]);
-    const [rejectedUsernames, setRejectedUsernames] = useState([]);
+    //const [selectedUsernames, setSelectedUsernames] = useState([]);
+    //const [rejectedUsernames, setRejectedUsernames] = useState([]);
     const [sendSelectedApplicants, setSendSelectedApplicants] = useState([]);
     const [sendRejectedApplicants, setSendRejectedApplicants] = useState([]);
     // const [fileName, setFileName] = useState('applicants');
@@ -68,8 +72,8 @@ const Applicants = () => {
             const selected = normalizedData.map((row) => row.Selected?.trim()).filter((val) => val);
             const rejected = normalizedData.map((row) => row.Rejected?.trim()).filter((val) => val);
 
-            setSelectedUsernames(selected);
-            setRejectedUsernames(rejected);
+            // setSelectedUsernames(selected);
+            // setRejectedUsernames(rejected);
 
             validateApplicants(selected, rejected);
         };
@@ -229,6 +233,7 @@ const Applicants = () => {
             </Table>
         </TableContainer>
     );
+    if (!data) return <p>Loading...</p>;
 
     return (
         <div style={{ padding: '20px' }}>
@@ -249,65 +254,29 @@ const Applicants = () => {
                         />
                     </Grid>
                 </Grid>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '20px', backgroundColor: 'white' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToPDF(data.applicants || [], 'Applicants')}
-                        >
-                            Save as PDF
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToExcel(data.applicants || [], 'Applicants')}
-                        >
-                            Save as Excel
-                        </Button>
-                    </Box>
-                    {renderTable(data.applicants || [], 'Applicants')}
-                </Box>
+                <AllApplicants
+                    exportToPDF={exportToPDF}
+                    exportToExcel={exportToExcel}
+                    data={data}
+                    renderTable={renderTable}
+                    company={company}
+                />
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '20px', backgroundColor: 'white' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToPDF(data.rejectedApplicants || [], 'Rejected Applicants')}
-                        >
-                            Save as PDF
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToExcel(data.rejectedApplicants || [], 'Rejected Applicants')}
-                        >
-                            Save as Excel
-                        </Button>
-                    </Box>
-                    {renderTable(data.rejectedApplicants || [], 'Rejected Applicants')}
-                </Box>
+                <SelectedApplicants
+                    exportToPDF={exportToPDF}
+                    exportToExcel={exportToExcel}
+                    data={data}
+                    renderTable={renderTable} 
+                    company={company}
+                />
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '20px', backgroundColor: 'white' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToPDF(data.selectedApplicants || [], 'Selected Applicants')}
-                        >
-                            Save as PDF
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => exportToExcel(data.selectedApplicants || [], 'Selected Applicants')}
-                        >
-                            Save as Excel
-                        </Button>
-                    </Box>
-                    {renderTable(data.selectedApplicants || [], 'Selected Applicants')}
-                </Box>
+                <RejectedAppliciants
+                    exportToPDF={exportToPDF}
+                    exportToExcel={exportToExcel}
+                    data={data}
+                    renderTable={renderTable}
+                    company={company}
+                />
 
                 <Box sx={{ marginBottom: '20px' }}>
                     {/* File Upload Input */}
@@ -318,13 +287,6 @@ const Applicants = () => {
                         style={{ marginBottom: '20px', display: 'block' }}
                     />
                     <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        {/* Display Selected and Rejected Usernames */}
-                        <div>
-                            <p><strong>Selected Usernames:</strong> {selectedUsernames.join(', ')}</p>
-                            <p><strong>Rejected Usernames:</strong> {rejectedUsernames.join(', ')}</p>
-                        </div>
-
-                        {/* Update Applicants Button */}
                         <Button
                             variant="contained"
                             color="secondary"

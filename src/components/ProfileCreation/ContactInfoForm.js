@@ -18,6 +18,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
     const [country, setCountry] = useState(userForm.contactInfo.country || '');
     const [state, setState] = useState(userForm.contactInfo.state || '');
+    const [selectedFile, setSelectedFile] = useState(userForm.resume.file || null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,34 +40,70 @@ const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
     };
 
     const handleImageChange = (e) => {
-        console.log(e.target.files);
+        const file = e.target.files[0];
+        if (file) {
+            const fileURL = URL.createObjectURL(file);
+            const fileSize = file.size;
+            const fileName = file.name;
+            
+            setSelectedFile({
+                fileName,
+                fileSize,
+                fileOpenUrl: fileURL,
+                file: file, // The actual file to upload
+                thumbNailUrl: fileURL // For preview (you can customize this later if needed)
+            });
+            setUserForm({
+                ...userForm,
+                resume: {
+                    fileName,
+                    fileSize,
+                    fileOpenUrl: fileURL,
+                    file: file,
+                    thumbNailUrl: fileURL
+                }
+            });
+        }
+    };
+
+    const handleFileRemove = () => {
+        setSelectedFile(null);
+        setUserForm({
+            ...userForm,
+            resume: {
+                fileName: "",
+                fileSize: null,
+                fileOpenUrl: "",
+                thumbNailUrl: "",
+                file: null
+            }
+        });
     };
 
     const handleCountryChange = (value) => {
-        setCountry(value); // Update country state
-        // Update userForm location with the new country
+        setCountry(value);
         setUserForm({
             ...userForm,
             contactInfo: {
                 ...userForm.contactInfo,
-                country: value, // Set country directly
+                country: value,
             },
-            location: `${state}, ${value}` // Combine state and country in location
+            location: `${state}, ${value}`
         });
     };
 
     const handleStateChange = (value) => {
-        setState(value); // Update state
-        // Update userForm location with the new state and country
+        setState(value);
         setUserForm({
             ...userForm,
             contactInfo: {
                 ...userForm.contactInfo,
-                state: value, // Set state directly
+                state: value,
             },
-            location: `${value}, ${country}` // Combine state and country in location
+            location: `${value}, ${country}`
         });
     };
+
     return (
         <Box sx={{ width: "100%", height: 550, borderRadius: 1, padding: 2 }}>
             <Grid container spacing={2}>
@@ -111,7 +148,7 @@ const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
                             placeholder="Enter phone number"
                             value={userForm.contactInfo.phone}
                             onChange={(phone) => handleChange({ target: { name: 'phone', value: phone } })}
-                            defaultCountry="US" // Example: set default country code if needed
+                            defaultCountry="US"
                             style={{
                                 height: '56px',
                                 width: '100%',
@@ -180,87 +217,46 @@ const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
                     </FormControl>
                 </Grid>
             </Grid>
-            <Grid container spacing={2} sx={{ mt: 2 }}>
-                {/* <Grid item xs={12}>
-                    <FormControl fullWidth>
-                        <FormLabel>Summary</FormLabel>
-                        <JoditEditor
-                            ref={editor}
-                            value={userForm.summary}
-                            onChange={handleChange}
-                        />
-                    </FormControl>
-                </Grid> */}
-                {/* <Grid item xs={6}>
-                    <TextField
-                        label="Summary"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        name="summary"
-                        value={userForm.summary}
-                        onChange={handleChange}
-                    />
-                </Grid> */}
-                {/* <Grid item xs={12}>
-                    <FormControl fullWidth>
-                        <FormLabel>About</FormLabel>
-                        <JoditEditor
-                            ref={editor}
-                            value={userForm.about}
-                            onChange={handleChange}
-                        />
-                    </FormControl>
-                </Grid> */}
-                {/* <Grid item xs={6}>
-                    <TextField
-                        label="About"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        name="about"
-                        value={userForm.about}
-                        onChange={handleChange}
-                    />
-                </Grid> */}
-            </Grid>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+
+            {/* File Upload Section */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
                 <Button
                     component="label"
                     variant="contained"
                     startIcon={<CloudUploadIcon />}
                 >
-                    Upload files
+                    {selectedFile ? "Change File" : "Upload PDF"}
                     <input
                         type="file"
                         onChange={handleImageChange}
-                        multiple
+                        accept=".pdf"
                         hidden
                     />
                 </Button>
+                {selectedFile && (
+                    <Box sx={{ mt: 2, textAlign: 'center' }}>
+                        <div>File: {selectedFile.fileName}</div>
+                        <div>Size: {Math.round(selectedFile.fileSize / 1024)} KB</div>
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={handleFileRemove}
+                            sx={{ mt: 1 }}
+                        >
+                            Remove File
+                        </Button>
+                    </Box>
+                )}
             </Box>
+
+            {/* Navigation buttons */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onPrev}
-                >
+                <Button variant="contained" color="primary" onClick={onPrev}>
                     PREV
                 </Button>
-                <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={onNext}
-                    >
-                        Next
-                    </Button>
-                {/* <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={onSubmit}
-                >
-                    Submit
-                </Button> */}
+                <Button variant="contained" color="primary" onClick={onNext}>
+                    Next
+                </Button>
             </Box>
         </Box>
     );

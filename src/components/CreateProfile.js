@@ -64,9 +64,27 @@ const CreateProfile = () => {
             "email": user.email,
             "phone": ""
         },
-        "resumeurl": "",
-        "profilePictureUrl": "",
-        "backgroundImageUrl": "",
+        "resume": {
+            fileName: "",
+            fileSize: null,
+            fileOpenUrl: "",
+            thumbNailUrl: "",
+            file: null // For the actual file to be uploaded
+        },
+        "profileImage": {
+            fileName: "",
+            fileSize: null,
+            fileOpenUrl: "",
+            thumbNailUrl: "",
+            file: null // For the actual file to be uploaded
+        },
+        "backgroundImage": {
+            fileName: "",
+            fileSize: null,
+            fileOpenUrl: "",
+            thumbNailUrl: "",
+            file: null // For the actual file to be uploaded
+        },
         "summary": "",
         "about": "",
         "location": ""
@@ -85,25 +103,59 @@ const CreateProfile = () => {
     };
 
     const handleSubmit = async () => {
-        console.log("Form Submitted", userForm);
+        console.log(userForm);
+        delete userForm.contactInfo.country;
+        delete userForm.contactInfo.state;
+        console.log(userForm);
+        const formData = new FormData();
+    
+        // Append the user form data as JSON
+        formData.append('userForm', JSON.stringify({
+            email: userForm.email,
+            userName: userForm.userName,
+            firstName: userForm.firstName,
+            middleName: userForm.middleName,
+            lastName: userForm.lastName,
+            role: userForm.role,
+            gender: userForm.gender,
+            summary: userForm.summary,
+            about: userForm.about,
+            location: userForm.location,
+            contactInfo: userForm.contactInfo
+        }));
+    
+        // Append each file with specific names to distinguish them in the backend
+        if (userForm.resume.file) {
+            formData.append('resumeFile', userForm.resume.file, userForm.resume.file.name);
+        }
+        if (userForm.profileImage.file) {
+            formData.append('profileImageFile', userForm.profileImage.file, userForm.profileImage.file.name);
+        }
+        if (userForm.backgroundImage.file) {
+            formData.append('backgroundImageFile', userForm.backgroundImage.file, userForm.backgroundImage.file.name);
+        }
+    
         try {
+            console.log(formData)
             const url = "http://localhost:9090/v1/api/users/add";
-            const response = await API.post(url, userForm);
-            if(response.status === 200) {
-                if(userForm.role === "PROFESSIONAL") {
-                    navigate(`/professional/profile/${user.username}`)
+            const response = await API.post(url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
                 }
-                else if(userForm.role === "USER") {
-                    navigate(`/user/profile/${user.username}`)
+            });
+    
+            if (response.status === 200) {
+                if (userForm.role === "PROFESSIONAL") {
+                    navigate(`/professional/profile/${user.username}`);
+                } else if (userForm.role === "USER") {
+                    navigate(`/user/profile/${user.username}`);
                 }
             }
-
+        } catch (err) {
+            console.error("Error during profile creation:", err);
         }
-        catch (err) {
-            console.log(err);
-        }
-        // Submit the data to your server here
     };
+    
     // Handle tab change
     const handleChange = (event, newValue) => {
         setSelectedTab(newValue);
@@ -114,7 +166,7 @@ const CreateProfile = () => {
             <CssBaseline />
             <DrawerAppBar />
             <Container maxWidth="lg">
-                <Box sx={{ backgroundColor: 'white', pt: 10, height: '100vh' }}>
+                <Box sx={{ backgroundColor: 'white', pt: 10 }}>
                     <Tabs
                         value={selectedTab}
                         onChange={handleChange}

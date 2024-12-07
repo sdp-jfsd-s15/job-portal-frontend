@@ -30,6 +30,7 @@ import MaterialUITable from './components/MaterialUITable';
 import SavedJobs from './components/User/Jobs/SavedJobs';
 import ViewJobFromProfile from './components/User/Jobs/ViewJobFromProfile';
 import Applicants from './components/Professional/P-Components/Jobs/ViewAllProfessionalJobs/Applicants';
+import EmailForm from './components/EmailForm';
 
 const App = () => {
   return (
@@ -50,7 +51,7 @@ const App = () => {
           <Route path='work' element={<Jobs />}/>
           <Route path='post-a-job' element={<PostAJob />}/>
           <Route path='view-all-my-posted-jobs' element={<ViewAllMyPostedJobs />}/>
-          <Route path='view-applicants/:id' element={<Applicants />}/>
+          <Route path='view-applicants/:id/:company' element={<Applicants />}/>
           <Route path='profile/:username' element={<PProfile />}/>
           <Route path='view-profile/:username' element={<ProfileViewer />}/>
           <Route path='messages' element={<Message />}/>
@@ -76,6 +77,7 @@ const App = () => {
         <Route path='/create-profile' element={<CreateProfile />}/>
         <Route path='/logout' element={<LogoutRedirector />}/>
         <Route path='/savePdf' element={<MaterialUITable />}/>
+        <Route path='/sendMail' element={<EmailForm />}/>
       </Routes>
     </BrowserRouter>
     </AuthProvider>
