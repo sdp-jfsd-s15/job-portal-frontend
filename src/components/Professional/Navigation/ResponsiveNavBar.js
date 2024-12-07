@@ -109,19 +109,6 @@ function DrawerAppBar(props) {
                     <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginRight: '150px', alignItems: 'center', ml: 25 }}>
                         <Button
                             sx={{
-                                color: isActive("/professional/") ? 'black' : '#073a8c',
-                                mr: 3, // Reduce margin between buttons
-                                '&:hover': {
-                                    backgroundColor: '#073a8c',
-                                    color: '#fff',
-                                }
-                            }}
-                            onClick={() => navigate("/professional/")}
-                        >
-                            <HomeIcon />
-                        </Button>
-                        <Button
-                            sx={{
                                 color: isActive("/professional/my-network") ? 'black' : '#073a8c',
                                 mr: 3, // Reduce margin between buttons
                                 '&:hover': {

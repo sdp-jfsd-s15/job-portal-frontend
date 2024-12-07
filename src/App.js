@@ -31,6 +31,11 @@ import SavedJobs from './components/User/Jobs/SavedJobs';
 import ViewJobFromProfile from './components/User/Jobs/ViewJobFromProfile';
 import Applicants from './components/Professional/P-Components/Jobs/ViewAllProfessionalJobs/Applicants';
 import EmailForm from './components/EmailForm';
+import AProfile from './components/Admin/AProfile';
+import AdminJobsViewer from './components/Admin/AdminJobsViewer';
+import AdminViewJob from './components/Admin/Jobs/AdminViewJob';
+import AdminViewApplicants from './components/Admin/Jobs/AdminViewApplicants';
+import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   return (
@@ -41,11 +46,16 @@ const App = () => {
         <Route path="/" element={<Welcome />} />
         <Route path='/login' element={<Signin />} />
         <Route path='/auth-redirect' element={<RedirectPage />}/>
-        <Route path='/admin/*' element={<Dashboard />}>
+        <Route path='/admin/*' element={<PrivateRoute element={<Dashboard />} />}>
           <Route path='' element={<Home />}/>
+          <Route path='profile/:username' element={<AProfile />} />
           <Route path='check-users' element={<AllUsers />}/>
+          <Route path='connection-details/:connectionCount/:userName' element={<MyConnections />}/>
+          <Route path='jobs' element={<AdminJobsViewer />}/>
+          <Route path='view-job/:id' element={<AdminViewJob />}/>
+          <Route path='view-applicants/:id/:company' element={<AdminViewApplicants />}/>
         </Route>
-        <Route path='/professional/*' element={<ProfessionalDashboard />}>
+        <Route path='/professional/*' element={<PrivateRoute element={<ProfessionalDashboard />} />}>
           <Route path='' element={<ProfessionalHome />}/>
           <Route path='my-network' element={<MyNetwork />}/>
           <Route path='work' element={<Jobs />}/>
@@ -59,7 +69,7 @@ const App = () => {
           <Route path='my-connections' element={<MyConnections />}/>
           <Route path='connection-details/:connectionCount/:userName' element={<MyConnections />}/>
         </Route>
-        <Route path='/user/*' element={<UserDashboard />}>
+        <Route path='/user/*' element={<PrivateRoute element={<UserDashboard />} />}>
          <Route path='' element={<UserHome />}/>
          <Route path='my-network' element={<MyNetwork />}/>
          <Route path='my-connections' element={<MyConnections />}/>
@@ -73,8 +83,8 @@ const App = () => {
          <Route path='view-job/:id' element={<ViewJob />}/>
          <Route path='view-job-applied/:id' element={<ViewJobFromProfile />}/>
         </Route>
-        <Route path='/check-profile' element={<ProfileRedirector />}/>
-        <Route path='/create-profile' element={<CreateProfile />}/>
+        <Route path='/check-profile' element={<PrivateRoute element={<ProfileRedirector />} />}/>
+        <Route path='/create-profile' element={<PrivateRoute element={<CreateProfile />} />}/>
         <Route path='/logout' element={<LogoutRedirector />}/>
         <Route path='/savePdf' element={<MaterialUITable />}/>
         <Route path='/sendMail' element={<EmailForm />}/>

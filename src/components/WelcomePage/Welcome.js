@@ -1,24 +1,17 @@
-import React, { useEffect } from 'react'
-import DrawerAppBar from "../Navigation/ResponsiveNavBar";
+import React from 'react'
+import { Helmet } from "react-helmet";
+import Landing from './screens/Landing';
 
 const Welcome = () => {
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Construct the URL with parameters
-                //console.log(response.data);
-                // Handle response data here...
-            } catch (error) {
-                // Handle errors here...
-            }
-        };
-        fetchData();
-    }, []);
-
     return (
         <div>
-            <DrawerAppBar/>
+            <Helmet>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;800&display=swap" rel="stylesheet" />
+            </Helmet>
+            <Landing />
         </div>
     )
 }

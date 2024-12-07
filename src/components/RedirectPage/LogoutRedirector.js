@@ -3,25 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../Loading';
 
 const LogoutRedirector = () => {
-    const navigate = useNavigate();
-    useEffect(() => {
-        const handleLogout = async () => {
-            const clientId = '5vghvp9oha7m6kkgkvhjc30f4t'; // Replace with your Cognito App Client ID
-            const redirectUri = encodeURIComponent('http://localhost:3000'); // Replace with your redirect URI
-            const domain = 'klefjobportal90053.auth.ap-south-1.amazoncognito.com'; // Replace with your Cognito domain
+  const navigate = useNavigate();
 
-            // Corrected URL construction with proper string interpolation
-            const signOutUrl = `https://${domain}/logout?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=`;
+  useEffect(() => {
+    const handleLogout = async () => {
+      const clientId = '5vghvp9oha7m6kkgkvhjc30f4t'; // Replace with your Cognito App Client ID
+      const redirectUri = encodeURIComponent('http://localhost:3000/'); // Replace with your redirect URI
+      const domain = 'klefjobportal90053.auth.ap-south-1.amazoncognito.com'; // Replace with your Cognito domain
 
-            // Redirect the user to the Cognito sign-out URL
-            window.location.href = signOutUrl;
-            navigate('/')
-        };
+      // Clear all sessionStorage and localStorage variables
+      sessionStorage.clear();
+      localStorage.clear();
 
-        handleLogout();
-    }, [navigate]);
+      // Construct the Cognito sign-out URL with required parameters
+      const signOutUrl = `https://${domain}/logout?client_id=${clientId}&logout_uri=${redirectUri}`;
 
-    return <div><Loading /></div>;
+      // Redirect the user to the Cognito sign-out URL
+      window.location.href = signOutUrl;
+    };
+
+    handleLogout();
+  }, [navigate]);
+
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
 };
 
 export default LogoutRedirector;

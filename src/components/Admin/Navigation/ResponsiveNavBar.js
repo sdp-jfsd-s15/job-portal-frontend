@@ -12,8 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import JobDeklo from "../../../images/JobDekloIcon.png";
-import Contact from '../../Navigation/Contact';
-import About from '../../Navigation/About';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const drawerWidth = 240;
 
@@ -21,25 +20,8 @@ function DrawerAppBar(props) {
     const navigate = useNavigate();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [contactAnchorEl, setContactAnchorEl] = React.useState(null);
-    const [aboutAnchorEl, setAboutAnchorEl] = React.useState(null);
     const [showTitle, setShowTitle] = React.useState(true); // State to control title visibility
 
-    const handleContactMenuOpen = (event) => {
-        setContactAnchorEl(event.currentTarget);
-    };
-
-    const handleContactMenuClose = () => {
-        setContactAnchorEl(null);
-    };
-
-    const handleAboutMenuOpen = (event) => {
-        setAboutAnchorEl(event.currentTarget);
-    };
-
-    const handleAboutMenuClose = () => {
-        setAboutAnchorEl(null);
-    };
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
@@ -119,11 +101,7 @@ function DrawerAppBar(props) {
                             <b>Users</b>
                         </Button>
                         {/* About Button and Hover Box */}
-                        <Box
-                            onMouseEnter={handleAboutMenuOpen}
-                            onMouseLeave={handleAboutMenuClose}
-                            sx={{ position: 'relative', mr: 7 }} // Ensure proper spacing
-                        >
+                        <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginRight: '150px', alignItems: 'center' }}>
                             <Button
                                 sx={{
                                     color: '#073a8c',
@@ -132,16 +110,25 @@ function DrawerAppBar(props) {
                                         color: '#fff',
                                     },
                                 }}
+                                onClick={() => navigate("/admin/jobs")}
                             >
-                                <b>About</b>
+                                <b>Jobs</b>
                             </Button>
-                            <About
-                                aboutAnchorEl={aboutAnchorEl}
-                                handleAboutMenuClose={handleAboutMenuClose}
-                            />
                         </Box>
+                        <Button
+                            sx={{
+                                mr: 1,
+                                '&:hover': {
+                                    backgroundColor: '#073a8c',
+                                    color: '#fff',
+                                },
+                            }}
+                            onClick={() => navigate('/logout')}
+                        >
+                            <ExitToAppIcon />
+                        </Button>
                         {/* Contact Button and Hover Box */}
-                        <Box
+                        {/* <Box
                             onMouseEnter={handleContactMenuOpen}
                             onMouseLeave={handleContactMenuClose}
                             sx={{ position: 'relative' }}
@@ -161,7 +148,7 @@ function DrawerAppBar(props) {
                                 contactAnchorEl={contactAnchorEl}
                                 handleContactMenuClose={handleContactMenuClose}
                             />
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Toolbar>
             </AppBar>
