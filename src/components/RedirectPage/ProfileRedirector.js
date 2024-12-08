@@ -15,7 +15,7 @@ const ProfileRedirector = () => {
                 return;
             }
 
-            const url = `http://localhost:9090/v1/api/users/checkUser/${user.username}`;
+            const url = `/v1/api/users/checkUser/${user.username}`;
 
             try {
                 const response = await API.get(url);

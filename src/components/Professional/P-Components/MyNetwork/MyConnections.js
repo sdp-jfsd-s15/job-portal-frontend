@@ -26,11 +26,11 @@ const MyConnections = () => {
         setCurrentUser(null);
     };
 
-    const handleRemoveConnection = async (userName) => {
+    const handleRemoveConnection = async (userName, status) => {
         try {
             // const status = "REJECTED";
-            const url = "Dont request to the url until you change the logic for backend";
-            // const url = `/v1/api/connections/updateConnection/${userName}/${status}`;
+            // const url = "Dont request to the url until you change the logic for backend";
+            const url = `/v1/api/connections/updateConnection/${userName}/${status}`;
             console.log("API URL:", url);
 
             const response = await API.put(url);
@@ -212,7 +212,7 @@ const MyConnections = () => {
                                     open={Boolean(anchorEl) && currentUser === connection.userName}
                                     onClose={handleMenuClose}
                                 >
-                                    <MenuItem onClick={() => handleRemoveConnection(connection.userName)}>
+                                    <MenuItem onClick={() => handleRemoveConnection(connection.userName,  "REMOVE")}>
                                         <Delete style={{ marginRight: '0.5rem' }} />
                                         Remove
                                     </MenuItem>

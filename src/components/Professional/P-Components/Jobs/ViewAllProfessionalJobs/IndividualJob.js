@@ -24,7 +24,7 @@ const IndividualJob = ({ job }) => {
 
   const handleDisableJob = async () => {
     try {
-      const url = `v1/api/job/disableJob?id=${job.id}&userName=${user.username}`;
+      const url = `/v1/api/job/disableJob?id=${job.id}&userName=${user.username}`;
       const response = await API.put(url);
       if (response.status === 200) {
         setIsPublish(false);
@@ -37,7 +37,7 @@ const IndividualJob = ({ job }) => {
 
   const handleEnableJob = async () => {
     try {
-      const url = `v1/api/job/enableJob?id=${job.id}&vacancy=${newVacancy}&userName=${user.username}`;
+      const url = `/v1/api/job/enableJob?id=${job.id}&vacancy=${newVacancy}&userName=${user.username}`;
       const response = await API.put(url);
       if (response.status === 200) {
         setIsPublish(true);
@@ -78,7 +78,7 @@ const IndividualJob = ({ job }) => {
   const handleUpdate = async (updatedJob) => {
     console.log('Updated Job:', updatedJob);
     try {
-      const url = `v1/api/job/updateJob/${updatedJob.id}`;
+      const url = `/v1/api/job/updateJob/${updatedJob.id}`;
       const response = await API.put(url, updatedJob);
       if (response.status === 200) {
         window.location.reload();

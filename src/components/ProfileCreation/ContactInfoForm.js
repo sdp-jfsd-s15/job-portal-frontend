@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -18,13 +17,14 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
     const [country, setCountry] = useState(userForm.contactInfo.country || '');
     const [state, setState] = useState(userForm.contactInfo.state || '');
-    const [selectedFile, setSelectedFile] = useState(userForm.resume.file || null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'summary' || name === 'about' || name === 'gender') {
+        if (name === 'summary' || name === 'about' || name === 'gender' || name === 'resume') {
+            // Handle fields that are directly in userForm
             setUserForm({ ...userForm, [name]: value });
         } else {
+            // Handle fields nested in contactInfo
             setUserForm({
                 ...userForm,
                 contactInfo: { ...userForm.contactInfo, [name]: value }
@@ -36,47 +36,6 @@ const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
         setUserForm({
             ...userForm,
             contactInfo: { ...userForm.contactInfo, birthday: date ? dayjs(date).format("DD/MM/YYYY") : "" }
-        });
-    };
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const fileURL = URL.createObjectURL(file);
-            const fileSize = file.size;
-            const fileName = file.name;
-            
-            setSelectedFile({
-                fileName,
-                fileSize,
-                fileOpenUrl: fileURL,
-                file: file, // The actual file to upload
-                thumbNailUrl: fileURL // For preview (you can customize this later if needed)
-            });
-            setUserForm({
-                ...userForm,
-                resume: {
-                    fileName,
-                    fileSize,
-                    fileOpenUrl: fileURL,
-                    file: file,
-                    thumbNailUrl: fileURL
-                }
-            });
-        }
-    };
-
-    const handleFileRemove = () => {
-        setSelectedFile(null);
-        setUserForm({
-            ...userForm,
-            resume: {
-                fileName: "",
-                fileSize: null,
-                fileOpenUrl: "",
-                thumbNailUrl: "",
-                file: null
-            }
         });
     };
 
@@ -219,35 +178,20 @@ const ContactInfoForm = ({ userForm, setUserForm, onNext, onPrev }) => {
             </Grid>
 
             {/* File Upload Section */}
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-                <Button
-                    component="label"
-                    variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                >
-                    {selectedFile ? "Change File" : "Upload PDF"}
-                    <input
-                        type="file"
-                        onChange={handleImageChange}
-                        accept=".pdf"
-                        hidden
+            <Grid container spacing={2} sx={{ mt: 1 }}>
+                <Grid item xs={4}>
+                    <TextField
+                        label="Resume URL"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        name="resume"
+                        value={userForm.resume}
+                        onChange={handleChange}
                     />
-                </Button>
-                {selectedFile && (
-                    <Box sx={{ mt: 2, textAlign: 'center' }}>
-                        <div>File: {selectedFile.fileName}</div>
-                        <div>Size: {Math.round(selectedFile.fileSize / 1024)} KB</div>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            onClick={handleFileRemove}
-                            sx={{ mt: 1 }}
-                        >
-                            Remove File
-                        </Button>
-                    </Box>
-                )}
-            </Box>
+                </Grid>
+            </Grid>
+
 
             {/* Navigation buttons */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>

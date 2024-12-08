@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import backgroundImageP from "../images/profileBackgroundStatic.jpeg";
-import ProfileImage from "../images/profileImage.jpeg";
 import { Button, CardActions, Link, CircularProgress } from '@mui/material';
 import ContactInfoPop from './ContactInfoPop';
 import AddIcon from '@mui/icons-material/Add';
@@ -15,25 +12,36 @@ import API from '../Hooks/Api';
 import { useNavigate } from 'react-router-dom';
 
 // Styled component for positioning the Avatar
-const AvatarWrapper = styled(Box)({
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'flex-start',
-});
+const AvatarWrapper = styled(Box)`
+  display: flex;
+  margin-left: 20px;
+  margin-top: -30px; /* Adjust positioning as needed */
+`;
 
-const ProfileAvatar = styled(Avatar)({
-    position: 'absolute',
-    top: '-60px',
-    left: '16px',
-    width: '150px',
-    height: '150px',
-    border: '4px solid white',
-});
+const ProfileAvatar = styled(Avatar)`
+  width: 90px; /* Adjust size as needed */
+  height: 120px;
+  font-size: 2rem; /* For larger text */
+  background-color: #1976d2; /* Background color for the avatar */
+  color: #fff;
+`;
+
+// Modified CardMedia container
+const CustomCardMedia = styled(Box)`
+  position: relative;
+  background-color: white; /* White background */
+  height: 194px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Text shadow effect */
+`;
 
 const MetaInfo = ({ userdetails }) => {
     const navigate = useNavigate();
     const [isPopupOpen, setPopupOpen] = React.useState(false);
     const [connectionStatus, setConnectionStatus] = React.useState("");
+    const firstLetter = userdetails.userName ? userdetails.userName.charAt(0).toUpperCase() : '';
 
     const handleConnectionAdd = async () => {
         try {
@@ -106,14 +114,20 @@ const MetaInfo = ({ userdetails }) => {
 
     return (
         <Card sx={{ width: '100%', height: '500px', position: 'relative' }}>
-            <CardMedia
-                component="img"
-                height="194"
-                image={backgroundImageP}
-                alt="Background"
-            />
+            <CustomCardMedia>
+                <Typography
+                    variant="h1"
+                    style={{
+                        color: 'black',
+                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.6)', // Text shadow
+                        fontWeight: 'bold',
+                    }}
+                >
+                    {userdetails.firstName}
+                </Typography>
+            </CustomCardMedia>
             <AvatarWrapper>
-                <ProfileAvatar alt="Profile Image" src={ProfileImage} />
+                <ProfileAvatar>{firstLetter}</ProfileAvatar>
             </AvatarWrapper>
             <CardContent sx={{ marginTop: '80px' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>

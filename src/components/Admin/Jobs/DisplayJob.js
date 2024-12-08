@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid, CardActionArea } from '@mui/materi
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import { useNavigate } from 'react-router-dom';
 
-const DisplayJob = ({ jobs, page, pageSize, onPageChange }) => {
+const DisplayJob = ({ jobs }) => {
   const navigate = useNavigate();
   const handleClickedJob = (id) => {
     navigate(`/admin/view-job/${id}`);
