@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
   const navigate = useNavigate();//
-  const redirectUri = encodeURIComponent('https://jobportalsdpps18-s15-04-90053-31880.netlify.app/auth-redirect');
+  const redirectUri = encodeURIComponent('http://localhost:3000/auth-redirect');
   const cognitoUrl = `https://klefjobportal90053.auth.ap-south-1.amazoncognito.com/oauth2/authorize?client_id=5vghvp9oha7m6kkgkvhjc30f4t&response_type=token&scope=email+openid+phone&redirect_uri=${redirectUri}`;
 
   const { login } = useAuth(); // Use `login` function from AuthContext
