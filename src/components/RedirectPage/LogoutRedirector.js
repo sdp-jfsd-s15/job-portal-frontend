@@ -8,7 +8,7 @@ const LogoutRedirector = () => {
   useEffect(() => {
     const handleLogout = async () => {
       const clientId = '5vghvp9oha7m6kkgkvhjc30f4t'; // Replace with your Cognito App Client ID
-      const redirectUri = encodeURIComponent('http://localhost:3000/'); // Replace with your redirect URI
+      const redirectUri = encodeURIComponent('https://jobportalsdpps18-s15-04-90053-31880.netlify.app/'); // Replace with your redirect URI
       const domain = 'klefjobportal90053.auth.ap-south-1.amazoncognito.com'; // Replace with your Cognito domain
 
       // Clear all sessionStorage and localStorage variables
