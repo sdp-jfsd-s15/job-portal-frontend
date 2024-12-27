@@ -20,7 +20,7 @@ const ProfessionalMetaJobs = ({ onJobClick }) => {
   React.useEffect(() => {
     const fetchProfessionalJobs = async () => {
       try {
-        const url = `/v1/api/job/getAllProfessionalJobs/${user.username}`;
+        const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getAllProfessionalJobs/${user.username}`;
         const response = await API.get(url);
         console.log(response.data); // Log response for debugging
         setJobs(response.data.data); // Set the fetched jobs to state

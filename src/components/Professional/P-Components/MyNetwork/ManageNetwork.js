@@ -15,7 +15,7 @@ const ManageNetwork = () => {
 
     const updateConnectionCount = async () => {
         try {
-            const url = "/v1/api/connections/countConnections";
+            const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/countConnections";
             const response = await API.get(url);
             setConnectionCount(response.data);
         } catch (err) {

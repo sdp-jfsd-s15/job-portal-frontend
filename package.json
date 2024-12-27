@@ -2,7 +2,6 @@
   "name": "job-portal-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app",
   "dependencies": {
     "@date-io/date-fns": "^3.0.0",
     "@emotion/react": "^11.13.3",

@@ -22,7 +22,7 @@ const RecentJobsPosted = ({ onDataSend }) => {
     useEffect(() => {
         const recentJobs = async () => {
             try {
-                const url = `/v1/api/job/recentlyAddedJobsByUserName/${user.username}`;
+                const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/recentlyAddedJobsByUserName/${user.username}`;
                 const response = await API.get(url);
                 if (response.status === 200) {
                     setDocumentCount(response.data.totalDocuments);

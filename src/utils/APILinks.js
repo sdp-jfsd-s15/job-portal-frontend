@@ -1,0 +1,1 @@
+export const BACKENDURL= "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app"

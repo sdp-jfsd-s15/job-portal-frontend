@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API = axios.create({
-    baseURL: 'http://localhost:9090', // Your backend base URL
+    baseURL: 'https://jobportalsdpps18-s15-04-90053-31880.up.railway.app', // Your backend base URL
     headers: {
         'Content-Type': 'application/json',
     },

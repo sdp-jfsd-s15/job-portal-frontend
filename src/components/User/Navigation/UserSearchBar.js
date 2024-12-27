@@ -14,7 +14,7 @@ const UserSearchBar = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await API.get(`v1/api/users/searchUsers?searchKeyword=${searchText}`);
+            const response = await API.get(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/searchUsers?searchKeyword=${searchText}`);
             setSuggestions(response.data.slice(0, 7)); // Limit to 7 suggestions
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -27,7 +27,7 @@ const UserSearchBar = () => {
         const usersFetcher = async () => {
             if (searchText.length >= 2) {
                 try {
-                    const response = await API.get(`v1/api/users/searchUsers?searchKeyword=${searchText}`);
+                    const response = await API.get(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/searchUsers?searchKeyword=${searchText}`);
                     setSuggestions(response.data.slice(0, 7)); // Limit to 7 suggestions
                 } catch (error) {
                     console.error('Error fetching users:', error);

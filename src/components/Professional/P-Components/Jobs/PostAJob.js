@@ -48,7 +48,7 @@ const PostAJob = () => {
     useEffect(() => {
         const fetchFilters = async () => {
             try {
-                const url = "/v1/api/filter/filters";
+                const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/filter/filters";
                 const response = await API.get(url);
                 const data = response.data;
                 setJobTypes(data.jobType);

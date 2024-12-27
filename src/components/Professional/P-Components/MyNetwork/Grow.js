@@ -8,7 +8,7 @@ const Grow = () => {
   const handleAccept = async (userName) => {
     // Handle Accept Logic Here
     try {
-      const url = `/v1/api/connections/updateConnection/${userName}/ACCEPTED`;
+      const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/updateConnection/${userName}/ACCEPTED`;
       const response = await API.put(url); // Send the PUT request to the API
       console.log('Connection accepted:', response.data); // Optionally log the response data
       window.location.reload();
@@ -20,7 +20,7 @@ const Grow = () => {
   const handleReject = async (userName) => {
     // Handle Reject Logic Here
     try {
-      const url = `/v1/api/connections/updateConnection/${userName}/REJECTED`;
+      const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/updateConnection/${userName}/REJECTED`;
       const response = await API.put(url); // Send the PUT request to the API
       console.log('Connection accepted:', response.data); // Optionally log the response data
       window.location.reload();
@@ -32,7 +32,7 @@ const Grow = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const url = "/v1/api/connections/getConnectionRequests";
+        const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/getConnectionRequests";
         const response = await API.get(url);
         setRequestReceived(response.data);
       } catch (err) {

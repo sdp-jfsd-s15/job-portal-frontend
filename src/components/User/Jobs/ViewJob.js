@@ -52,7 +52,7 @@ const ViewJob = () => {
 
   const handleSaveJob = async () => {
     try {
-      const url = `/v1/api/job/saveJob/${id}`;
+      const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/saveJob/${id}`;
       const response = await API.post(url)
       console.log(response)
       fetchJob();
@@ -64,7 +64,7 @@ const ViewJob = () => {
 
   const handleUnSaveJob = async () => {
     try {
-      const url = `/v1/api/job/unSaveJob/${id}`;
+      const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/unSaveJob/${id}`;
       const response = await API.put(url)
       console.log(response)
       fetchJob();
@@ -76,7 +76,7 @@ const ViewJob = () => {
 
   const fetchJob = async () => {
     try {
-      const response = await API.get(`/v1/api/job/getJob/${id}`);
+      const response = await API.get(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getJob/${id}`);
       const jobData = response.data.jobData || {};
       setJob({
         id: jobData.id || "",
@@ -112,7 +112,7 @@ const ViewJob = () => {
 
   const handleConfirm = async () => {
     try {
-      const url = `/v1/api/jobApplicants/addApplicant/${job.id}/${job.createdBy}`;
+      const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/jobApplicants/addApplicant/${job.id}/${job.createdBy}`;
       const response = await API.post(url, userProfile);
       console.log('Application submitted successfully:', response.data);
       setOpen(false); // Close the dialog after successful API call

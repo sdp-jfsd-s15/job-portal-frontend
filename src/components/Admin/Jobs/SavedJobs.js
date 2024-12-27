@@ -11,7 +11,7 @@ const SavedJobs = () => {
     const [loading, setLoading] = useState(false);
     const fetchSavedJobs = async () => {
         try {
-            const url = "/v1/api/job/getSavedJobs";
+            const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getSavedJobs";
             const response = await API.get(url);
             setSavedJobs(response.data.jobs);
             if (response.data.jobs.length > 0) {
@@ -31,7 +31,7 @@ const SavedJobs = () => {
     const fetchJobDetails = async (jobId) => {
         try {
             setLoading(true);
-            const url = `/v1/api/job/getJob/${jobId}`;
+            const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getJob/${jobId}`;
             const response = await API.get(url);
             console.log(response.data);
             setJobDetails(response.data.jobData);

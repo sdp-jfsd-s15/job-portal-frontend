@@ -30,7 +30,7 @@ const MyConnections = () => {
         try {
             // const status = "REJECTED";
             // const url = "Dont request to the url until you change the logic for backend";
-            const url = `/v1/api/connections/updateConnection/${userName}/${status}`;
+            const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/updateConnection/${userName}/${status}`;
             console.log("API URL:", url);
 
             const response = await API.put(url);
@@ -75,7 +75,7 @@ const MyConnections = () => {
 
     const updateConnectionCount = async () => {
         try {
-            const url = "/v1/api/connections/countConnections";
+            const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/countConnections";
             const response = await API.get(url);
             setConnectionCount(response.data);
         } catch (err) {
@@ -90,7 +90,7 @@ const MyConnections = () => {
     useEffect(() => {
         const fetchConnections = async () => {
             try {
-                let url = `/v1/api/connections/get`; // Default API call
+                let url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/get`; // Default API call
 
                 // Check if username is present and modify the API call if needed
                 if (userName) {

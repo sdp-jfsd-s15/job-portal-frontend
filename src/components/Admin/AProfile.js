@@ -16,7 +16,7 @@ const AProfile = () => {
     React.useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const url = `/v1/api/users/getDetails/${username}`;
+                const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/getDetails/${username}`;
                 const response = await API.get(url);
                 console.log(response.data);
                 setUserDetails(response.data);

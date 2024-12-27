@@ -24,6 +24,7 @@ const URLLinks = ({ userdetails }) => {
             } else if (currentPath.startsWith('/user/profile') || userdetails.role === "USER") {
                 targetPath = `http://localhost:3000/user/profile/${userdetails.userName}`;
             }
+            //
             setTextToCopy(targetPath);
         };
         handleTextToCopy();

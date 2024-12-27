@@ -24,7 +24,7 @@ export default function AllUsers() {
 
   const fetchUsers = async () => {
     try {
-      const response = await API.get('/v1/api/users/getAllUsers');
+      const response = await API.get('https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/getAllUsers');
       if (response.data && response.data.users) {
         setRows(response.data.users);
       }

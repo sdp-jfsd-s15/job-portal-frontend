@@ -37,7 +37,7 @@ const Applicants = () => {
     useEffect(() => {
         const fetchApplicants = async () => {
             try {
-                const url = `/v1/api/jobApplicants/getJobApplicantsList/${id}`;
+                const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/jobApplicants/getJobApplicantsList/${id}`;
                 const response = await API.get(url);
                 setData(response.data);
                 console.log(response.data);

@@ -40,7 +40,7 @@ const Chat = ({ receiverUserName, senderUserName, activeUser }) => {
         if (!senderUserName || !receiverUserName) return;
 
         client.onConnect = () => {
-            client.subscribe("/topic/private", (msg) => {
+            client.subscribe("https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/topic/private", (msg) => {
                 try {
                     const receivedMessage = JSON.parse(msg.body);
                     if (
@@ -80,7 +80,7 @@ const Chat = ({ receiverUserName, senderUserName, activeUser }) => {
 
             try {
                 client.publish({
-                    destination: "/app/chat.sendMessage",
+                    destination: "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/app/chat.sendMessage",
                     body: JSON.stringify(chatMessage),
                 });
                 setMessage("");

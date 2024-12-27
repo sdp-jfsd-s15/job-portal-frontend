@@ -21,7 +21,7 @@ const Message = () => {
   useEffect(() => {
     const fetchConnectionOfUser = async () => {
       try {
-        const url = "/v1/api/connections/get";
+        const url = "https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/get";
         const response = await API.get(url);
         setUsersConnection(response.data.connections);
         setFilteredConnections(response.data.connections); // Set all users initially

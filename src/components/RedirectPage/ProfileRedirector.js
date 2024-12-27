@@ -14,8 +14,9 @@ const ProfileRedirector = () => {
                 console.error("Username is undefined.");
                 return;
             }
-
-            const url = `/v1/api/users/checkUser/${user.username}`;
+            
+            const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/checkUser/${user.username}`;
+            console.log(url);
 
             try {
                 const response = await API.get(url);

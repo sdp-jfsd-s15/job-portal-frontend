@@ -90,7 +90,7 @@ const CreateProfile = () => {
     
         try {
             console.log(userForm)
-            const url = 'http://localhost:9090/v1/api/users/add';
+            const url = 'https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/add';
             const response = await API.post(url, userForm)
     
             if (response.status === 200) {

@@ -20,7 +20,7 @@ const UserJobPage = () => {
 
   const fetchAllJobs = async () => {
     try {
-      const response = await API.get('/v1/api/job/getAllJobs', {
+      const response = await API.get('https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getAllJobs', {
         params: { page_size: page.page_size, page_no: page.page_no },
       });
       const data = response.data;
@@ -35,7 +35,7 @@ const UserJobPage = () => {
   const fetchFilteredJobs = async () => {
     try {
       console.log(filters);
-      const response = await API.post(`/v1/api/job/filter?page_size=${page.page_size}&page_no=${page.page_no}`, filters);
+      const response = await API.post(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/filter?page_size=${page.page_size}&page_no=${page.page_no}`, filters);
       const data = response.data;
       console.log(data.jobs);
       setSavedCount(data.savedJobs);

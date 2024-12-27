@@ -45,7 +45,7 @@ const MetaInfo = ({ userdetails }) => {
 
     const handleConnectionAdd = async () => {
         try {
-            const url = '/v1/api/connections/addConnection';
+            const url = 'https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/addConnection';
             const formData = {
                 "userName": userdetails.userName
             };
@@ -61,7 +61,7 @@ const MetaInfo = ({ userdetails }) => {
     React.useEffect(() => {
         const checkConnection = async () => {
             try {
-                const url = `/v1/api/connections/checkConnection/${userdetails.userName}`;
+                const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/connections/checkConnection/${userdetails.userName}`;
                 const response = await API.get(url);
                 console.log(response.status);
                 if (response.status === 200) {

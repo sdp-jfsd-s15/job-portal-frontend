@@ -42,7 +42,7 @@ const ViewJobFromProfile = () => {
   
     const handleSaveJob = async () => {
       try {
-        const url = `/v1/api/job/saveJob/${id}`;
+        const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/saveJob/${id}`;
         const response = await API.post(url)
         console.log(response)
         fetchJob();
@@ -54,7 +54,7 @@ const ViewJobFromProfile = () => {
   
     const handleUnSaveJob = async () => {
       try {
-        const url = `/v1/api/job/unSaveJob/${id}`;
+        const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/unSaveJob/${id}`;
         const response = await API.put(url)
         console.log(response)
         fetchJob();
@@ -66,7 +66,7 @@ const ViewJobFromProfile = () => {
   
     const fetchJob = async () => {
       try {
-        const response = await API.get(`/v1/api/job/getJob/${id}`);
+        const response = await API.get(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/getJob/${id}`);
         const jobData = response.data.jobData || {};
         setJob({
           id: jobData.id || "",

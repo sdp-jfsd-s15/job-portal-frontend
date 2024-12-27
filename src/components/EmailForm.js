@@ -27,7 +27,7 @@ const EmailForm = () => {
         recipients: ["shashanklinga7@gmail.com"]
     }
 
-    const response = await API.post('/v1/api/mail/send-email', requestJSON);
+    const response = await API.post('https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/mail/send-email', requestJSON);
 
     if (response.ok) {
       alert('Email sent successfully!');

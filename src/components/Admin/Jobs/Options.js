@@ -16,7 +16,7 @@ const Options = ({ totalDocumentsCount, filtersSelected, onApplyFilters }) => {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const response = await API.get('/v1/api/filter/filters');
+        const response = await API.get('https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/filter/filters');
         const data = response.data;
         console.log(data);
         setAvailableFilters({

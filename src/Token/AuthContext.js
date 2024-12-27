@@ -55,7 +55,7 @@ export const AuthProvider = (props) => {
 
   const fetchUserProfile = async (username) => {
     try {
-      const response = await API.get(`/v1/api/users/getDetails/${username}`);
+      const response = await API.get(`https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/users/getDetails/${username}`);
       const profileData = response.data;
 
       // Save user profile to sessionStorage

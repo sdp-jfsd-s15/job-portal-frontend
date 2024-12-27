@@ -31,7 +31,7 @@ const JobDetails = ({ job, loading, fetchSavedJobs }) => {
 
     const handleUnSaveJob = async () => {
         try {
-            const url = `/v1/api/job/unSaveJob/${job.id}`;
+            const url = `https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/job/unSaveJob/${job.id}`;
             const response = await API.put(url)
             console.log(response)
             await fetchSavedJobs();

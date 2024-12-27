@@ -54,7 +54,7 @@ const SelectedApplicants = ({ exportToPDF, exportToExcel, data, renderTable, com
             recipients: emailList,
         };
 
-        const response = await API.post('/v1/api/mail/send-email', requestPayload);
+        const response = await API.post('https://jobportalsdpps18-s15-04-90053-31880.up.railway.app/v1/api/mail/send-email', requestPayload);
 
         if (response.status === 200) {
             alert('Email sent successfully!');
