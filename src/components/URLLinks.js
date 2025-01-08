@@ -7,7 +7,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const URLLinks = ({ userdetails }) => {
     const [copySuccess, setCopySuccess] = React.useState(false);
     const role = userdetails.role;
-    const textToCopy = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/${role}/profile/${userdetails.userName}`;
+    const lowercaseRole = role.toLowerCase();
+    const textToCopy = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/${lowercaseRole}/profile/${userdetails.userName}`;
 
     const handleCopy = async () => {
         try {
@@ -44,7 +45,7 @@ const URLLinks = ({ userdetails }) => {
                     <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
                 </Box>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
-                    https://jobportalsdpps18-s15-04-90053-31880.netlify.app/<br />{role}/profile/{userdetails.userName}
+                    https://jobportalsdpps18-s15-04-90053-31880.netlify.app/<br />{lowercaseRole}/profile/{userdetails.userName}
                 </Typography>
             </CardContent>
         </Card>
