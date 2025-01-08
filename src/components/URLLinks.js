@@ -6,7 +6,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const URLLinks = ({ userdetails }) => {
     const [copySuccess, setCopySuccess] = React.useState(false);
-    const textToCopy = `http://localhost:3000/professional/profile/${userdetails.userName}`;
+    const role = userdetails.role;
+    const textToCopy = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/${role}/profile/${userdetails.userName}`;
 
     const handleCopy = async () => {
         try {
@@ -43,7 +44,7 @@ const URLLinks = ({ userdetails }) => {
                     <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
                 </Box>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary', marginRight: 1 }}>
-                    http://localhost:3000/professional/profile/<br />{userdetails.userName}
+                    https://jobportalsdpps18-s15-04-90053-31880.netlify.app/<br />{role}/profile/{userdetails.userName}
                 </Typography>
             </CardContent>
         </Card>
