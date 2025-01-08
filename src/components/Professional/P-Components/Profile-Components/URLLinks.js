@@ -20,9 +20,9 @@ const URLLinks = ({ userdetails }) => {
             const currentPath = window.location.pathname;
             let targetPath = '';
             if (currentPath.startsWith('/professional/profile')) {
-                targetPath = `http://localhost:3000/professional/profile/${userdetails.userName}`;
+                targetPath = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/professional/profile/${userdetails.userName}`;
             } else if (currentPath.startsWith('/user/profile')) {
-                targetPath = `http://localhost:3000/user/profile/${userdetails.userName}`;
+                targetPath = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/user/profile/${userdetails.userName}`;
             }
             setTextToCopy(targetPath);
         };
