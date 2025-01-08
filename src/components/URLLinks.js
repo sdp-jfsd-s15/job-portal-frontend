@@ -6,8 +6,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const URLLinks = ({ userdetails }) => {
     const [copySuccess, setCopySuccess] = React.useState(false);
-    const role = userdetails.role;
-    const lowercaseRole = role.toLowerCase();
+    const role = userdetails?.role || "default"; // Fallback to "default" if role is undefined
+    const lowercaseRole = role.toLowerCase(); // Safe to use toLowerCase now
     const textToCopy = `https://jobportalsdpps18-s15-04-90053-31880.netlify.app/${lowercaseRole}/profile/${userdetails.userName}`;
 
     const handleCopy = async () => {
