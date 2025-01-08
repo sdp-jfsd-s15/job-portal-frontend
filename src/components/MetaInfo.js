@@ -113,7 +113,7 @@ const MetaInfo = ({ userdetails }) => {
     };
 
     return (
-        <Card sx={{ width: '100%', height: '500px', position: 'relative' }}>
+        <Card sx={{ width: '100%', height: '100%', position: 'relative' }}>
             <CustomCardMedia>
                 <Typography
                     variant="h1"
