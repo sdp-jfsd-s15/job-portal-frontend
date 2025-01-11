@@ -11,6 +11,7 @@ const ContactInfoPop = ({ open, onClose, contactDetails = {} }) => {
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+            <DialogContent>
                 <Typography variant="body1"><strong>Phone:</strong> {contactDetails.phone || 'N/A'}</Typography>
                 <Typography variant="body1"><strong>Email:</strong> {contactDetails.email || 'N/A'}</Typography>
                 <Typography variant="body1"><strong>Address:</strong> {contactDetails.address || 'N/A'}</Typography>
